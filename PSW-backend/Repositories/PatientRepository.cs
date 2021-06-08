@@ -1,4 +1,5 @@
-﻿using PSW_backend.Repositories.Interfaces;
+﻿using PSW_backend.Models;
+using PSW_backend.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,5 +9,32 @@ namespace PSW_backend.Repositories
 {
     public class PatientRepository : IPatientRepository
     {
+        private readonly ApplicationDbContext _applicationDbContext;
+
+        public PatientRepository(ApplicationDbContext applicationDbContext)
+        {
+            _applicationDbContext = applicationDbContext;
+        }
+
+        public Patient GetPatientByEmail(string email)
+        {
+            return _applicationDbContext.Patients.FirstOrDefault(patient => patient.Email.Equals(email));
+        }
+
+        public Patient GetPatientByUsername(string username)
+        {
+            return _applicationDbContext.Patients.FirstOrDefault(patient => patient.Username.Equals(username));
+        }
+
+        public List<Patient> GetAll()
+        {
+            return _applicationDbContext.Patients.ToList();
+        }
+
+        public void SavePatient(Patient patient)
+        {
+            _applicationDbContext.Patients.Add(patient);
+            _applicationDbContext.SaveChanges();
+        }
     }
 }

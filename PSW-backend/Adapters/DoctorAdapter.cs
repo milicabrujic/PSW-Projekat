@@ -1,4 +1,5 @@
 ﻿using PSW_backend.Dtos;
+using PSW_backend.Enums;
 using PSW_backend.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace PSW_backend.Adapters
             doctor.Password = dto.Password;
             doctor.Address = dto.Address;
             doctor.PhoneNumber = dto.PhoneNumber;
-            doctor.Role = dto.Role;
+            doctor.Role = (Roles)Enum.Parse(typeof(Roles), dto.Role);
             doctor.IsBlocked = dto.IsBlocked;
             doctor.IsMalicious = dto.IsMalicious;
             return doctor;
@@ -37,7 +38,7 @@ namespace PSW_backend.Adapters
             dto.Password = doctor.Password;
             dto.Address = doctor.Address;
             dto.PhoneNumber = doctor.PhoneNumber;
-            dto.Role = doctor.Role;
+            dto.Role = (doctor.Role.ToString());
             dto.IsBlocked = doctor.IsBlocked;
             dto.IsMalicious = doctor.IsMalicious;
             return dto;
