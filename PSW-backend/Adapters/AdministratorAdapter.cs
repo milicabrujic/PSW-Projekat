@@ -1,4 +1,5 @@
 ﻿using PSW_backend.Dtos;
+using PSW_backend.Enums;
 using PSW_backend.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace PSW_backend.Adapters
             administrator.Password = dto.Password;
             administrator.Address = dto.Address;
             administrator.PhoneNumber = dto.PhoneNumber;
-            administrator.Role = dto.Role;
+            administrator.Role = (Roles)Enum.Parse(typeof(Roles), dto.Role);
             administrator.IsBlocked = dto.IsBlocked;
             administrator.IsMalicious = dto.IsMalicious;
             return administrator;
@@ -37,7 +38,7 @@ namespace PSW_backend.Adapters
             dto.Password = administrator.Password;
             dto.Address = administrator.Address;
             dto.PhoneNumber = administrator.PhoneNumber;
-            dto.Role = administrator.Role;
+            dto.Role = (administrator.Role.ToString());
             dto.IsBlocked = administrator.IsBlocked;
             dto.IsMalicious = administrator.IsMalicious;
             return dto;

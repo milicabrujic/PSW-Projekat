@@ -40,5 +40,7 @@ namespace PSW_backend.Models
         public bool IsBlocked { get; set; }
 
         public bool IsMalicious { get; set; }
+
+        public String AuthenticationToken { get; set; }
     }
 }

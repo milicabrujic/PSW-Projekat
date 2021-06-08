@@ -16,8 +16,9 @@ namespace PSW_backend.Dtos
         public string Password { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public Roles Role { get; set; }
+        public string Role { get; set; }
         public bool IsBlocked { get; set; }
         public bool IsMalicious { get; set; }
+        public string AuthenticationToken { get; set; }
     }
 }
