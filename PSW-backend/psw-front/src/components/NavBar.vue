@@ -14,7 +14,19 @@
     <!-- gornji toolbar -->
     <v-toolbar flat class="mx-12">
       <v-spacer></v-spacer>
-      <div>
+      <div class="mx-2">
+        <LoginComponent
+          @loggedIn="
+            snackbarSuccess = true;
+            snackbarSuccessText = 'You are logged in!';
+          "
+          @notLoggedIn="
+            snackbarDanger = true;
+            snackbarDangerText = 'Can not log in. There is no such user!';
+          "
+        />
+      </div>
+      <div class="mx-2">
         <RegistrationComponent
           @registered="
             snackbarSuccess = true;
@@ -26,15 +38,23 @@
           "
         />
       </div>
+      <v-btn text color="primary" v-if="this.$store.state.user.role != 'None'">
+        <span @click="logout()">Logout</span>
+        <LogoutIcon></LogoutIcon>
+      </v-btn>
     </v-toolbar>
   </nav>
 </template>
 
 <script>
 import RegistrationComponent from "@/components/homePage/RegistrationComponent.vue";
+import LoginComponent from "@/components/homePage/LoginComponent.vue";
+import LogoutIcon from "vue-material-design-icons/Logout.vue";
 export default {
   components: {
     RegistrationComponent,
+    LoginComponent,
+    LogoutIcon,
   },
   data() {
     return {
@@ -45,6 +65,14 @@ export default {
     };
   },
   methods: {
+    logout() {
+      //localStorage.removeItem("loggedUser");
+      this.$store.commit("logout");
+      this.setSnackbarSuccess("You are logged out!");
+      this.LoginDialog = false;
+      console.log("ROLE: " + this.$store.state.user.role + " OVO JE ROLA");
+      console.log("TOKEN: " + this.$store.state.token + " OVO JE TOKEN");
+    },
     setSnackbarSuccess(message) {
       this.snackbarSuccess = true;
       this.snackbarSuccessText = message;

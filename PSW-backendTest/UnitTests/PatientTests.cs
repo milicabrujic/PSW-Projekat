@@ -65,7 +65,7 @@ namespace PSW_backendTest.UnitTests
 
         #region PatientRegistrationTests
         [Theory]
-        [InlineData("mb", "aa@gmail.com")]
+        [InlineData("mb", "aa")]
         [InlineData("aa", "mb@gmail.com")]
         [InlineData("mb", "mb@gmail.com")]
         public void Finds_that_patient_already_exists(string username, string email)

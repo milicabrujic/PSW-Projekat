@@ -24,6 +24,7 @@ namespace PSW_backend.Adapters
             user.Role = (Roles)Enum.Parse(typeof(Roles), dto.Role);
             user.IsBlocked = dto.IsBlocked;
             user.IsMalicious = dto.IsMalicious;
+            user.AuthenticationToken = dto.AuthenticationToken;
             return user;
         }
 
@@ -41,6 +42,7 @@ namespace PSW_backend.Adapters
             dto.Role = (user.Role.ToString());
             dto.IsBlocked = user.IsBlocked;
             dto.IsMalicious = user.IsMalicious;
+            dto.AuthenticationToken = user.AuthenticationToken;
             return dto;
         }
     }

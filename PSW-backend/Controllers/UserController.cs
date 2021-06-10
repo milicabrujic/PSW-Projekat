@@ -22,5 +22,17 @@ namespace PSW_backend.Controllers
         {
             _userService = userService;
         }
+
+        [HttpPost]
+        [Route("login")]
+        public IActionResult Login([FromBody] LoginDto loginDto)
+        {
+            UserDto userDto = _userService.Login(loginDto);
+
+            if (userDto == null)
+                return NotFound();
+
+            return Ok(userDto);
+        }
     }
 }
