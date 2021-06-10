@@ -12,10 +12,9 @@ namespace PSW_backend.Models
         public virtual ICollection<MedicalAppointment> MedicalAppointments { get; set; }
         public virtual ICollection<PatientFeedback> PatientFeedbacks { get; set; }
         public int CancelledMedicalAppointments { get; set; }
-
-
         [ForeignKey("Doctor")]
         public int GeneralDoctorId { get; set; }
         public virtual Doctor GeneralDoctor { get; set; }
+        public virtual ICollection<Recommendation> Recommendations { get; set; }
     }
 }

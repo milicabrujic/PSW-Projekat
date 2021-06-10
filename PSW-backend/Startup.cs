@@ -38,7 +38,10 @@ namespace PSW_backend
            
             services.AddSpaStaticFiles(configuration: options => { options.RootPath = "wwwroot"; });
             services.AddControllers();
-
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             // For Entity Framework  
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 

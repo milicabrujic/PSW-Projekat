@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
-
+import MedicalAppointment from '../components/medicalAppointment/MedicalAppointment.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,6 +9,11 @@ const routes = [
     path: '/',
     name: 'HomePage',
     component: HomePage
+  },
+  {
+    path: '/createAppointment',
+    name: 'Medical Appointment',
+    component: MedicalAppointment
   }
 ]
 

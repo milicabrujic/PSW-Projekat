@@ -26,6 +26,11 @@
           "
         />
       </div>
+      <div class="mx-2">
+        <router-link to="/createAppointment" class="item"
+          >Create Appointment</router-link
+        >
+      </div>
     </v-toolbar>
   </nav>
 </template>
