@@ -20,128 +20,89 @@ namespace PSW_backend.Services
             this._medicalAppointmentRepository = medicalAppointmentRepository;
             this._doctorRepository = doctorRepository;
         }
-        public void saveAppointment(MedicalAppointmentDto medicalAppointmentDto)
+        public void SaveAppointment(MedicalAppointmentDto medicalAppointmentDto)
         {
             MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
             _medicalAppointmentRepository.SaveMedicalAppointment(medicalAppointment);
         }
-        public MedicalAppointment findAppointment(MedicalAppointmentDto medicalAppointmentDto, string priority)
+        public MedicalAppointmentDto FindAppointment(MedicalAppointmentDto medicalAppointmentDto, string priority)
         {
-            MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
             Doctor doctor = _doctorRepository.FindById(medicalAppointmentDto.DoctorId);
-            medicalAppointment.Doctor = doctor;
             DateTime dateTime = medicalAppointmentDto.Date;
-            if (priority == "time" && doctor.Type == Enums.DoctorType.General)
-            {
-                DateTime doctorFreeTime = findDoctorTime(doctor, dateTime);
-                if (!dateTime.Equals(doctorFreeTime))
-                {
+            if (priority.Equals("time") && doctor.Type == Enums.DoctorType.General) {             
+                DateTime doctorFreeTime = FindDoctorTime(doctor, dateTime);
+                if (!dateTime.Equals(doctorFreeTime)) {                
                     return null;
                 }
             }
-            else if (priority.Equals("time") && doctor.Type == Enums.DoctorType.Specialist)
-            {
-                doctor = findDoctorSpecialist(medicalAppointment);
-                medicalAppointment.Doctor = doctor;
-                if (doctor != null)
-                {
-                    medicalAppointment.DoctorId = doctor.Id;
+            else if (priority.Equals("time") && doctor.Type == Enums.DoctorType.Specialist) {             
+                doctor = FindDoctorSpecialist(doctor,dateTime);               
+                if (doctor == null) {                 
+                    return null;
                 }
                 else {
-                    medicalAppointment = null;
-                }
-                
-               
+                    medicalAppointmentDto.DoctorId = doctor.Id;
+                }                               
             }
-            else
-            {
-                dateTime = findDoctorTime(doctor, dateTime);
-                medicalAppointment.Date = dateTime;
+            else {             
+                dateTime = FindDoctorTime(doctor, dateTime);
+                medicalAppointmentDto.Date = dateTime;
             }
-
-            return medicalAppointment;
+            return medicalAppointmentDto;
         }
 
         #region heplper_function
 
-        public DateTime findDoctorTime(Doctor doctor, DateTime dateTime)
-        {
-
-            List<MedicalAppointment> appointments = _medicalAppointmentRepository.GetDoctorAppointments(doctor.Id);
-            Boolean flag = false;
-            foreach (MedicalAppointment appointment in appointments)
+        public DateTime FindDoctorTime(Doctor doctor, DateTime dateTime)
+        {    
+            bool changeTime = false;
+            if (CheckDateEquality(doctor,dateTime)) {
+                dateTime = dateTime.AddDays(1);
+                changeTime = true;
+            }                           
+            if (changeTime)
             {
-                if (appointment.Date.Equals(dateTime) && appointment.DoctorId.Equals(doctor.Id))
-                {
-                    dateTime = dateTime.AddDays(1);
-                    flag = true;
-                    break;
-                }
-            }
-            if (flag)
-            {
-                findDoctorTime(doctor, dateTime);
+                FindDoctorTime(doctor, dateTime);
             }
             return dateTime;
         }
 
-        public Doctor findDoctorSpecialist(MedicalAppointment medicalAppointment)
+        public Doctor FindDoctorSpecialist(Doctor specialist,DateTime dateTime)
         {
-            List<MedicalAppointment> appointments = _medicalAppointmentRepository.GetDoctorAppointments(medicalAppointment.DoctorId);
-            Console.WriteLine(appointments.Count);
-            Doctor doctor = medicalAppointment.Doctor;
-            if (appointments.Count == 0)
-            {
-                Console.WriteLine("USAO");
-                return doctor;
-            }
-
-            foreach (MedicalAppointment appointment in appointments)
-            {
-                if (appointment.Date.Equals(medicalAppointment.Date))
-                {
-                    doctor = changeDoctor(medicalAppointment);
-                    break;
-                }
-            }
+            Doctor doctor = specialist;
+            if (CheckDateEquality(specialist, dateTime)) {
+                doctor = ChangeDoctor(dateTime);
+            }                  
             return doctor;
         }
-
-        private Doctor changeDoctor(MedicalAppointment medicalAppointment)
+        public Doctor ChangeDoctor(DateTime dateTime)
         {
             List<Doctor> specialists = _doctorRepository.DoctorSpecialists();
-
-            Boolean flag = false;
             foreach (Doctor specialist in specialists)
             {
-               
-                    flag = false;
-                    List<MedicalAppointment> appointments = _medicalAppointmentRepository.GetDoctorAppointments(specialist.Id);
-                    Console.WriteLine("appointmentss u special" + appointments.Count());
-                    foreach (MedicalAppointment appointment in appointments)
-                    {
-                        String DoctorId = specialist.Id.ToString();
-
-                        if (appointment.Date.Equals(medicalAppointment.Date))
-                        {
-                            Console.WriteLine("usao u if od change");
-                            flag = true;
-                            break;
-                        }
-
-                    }
-                    if (flag == false)
-                    {
-                        Console.WriteLine("Usao u if za izlaz");
-                        return specialist;
-                    }
-
+                bool iSNewSpecialist = false;
+                if (CheckDateEquality(specialist, dateTime)) {
+                    iSNewSpecialist = true;
+                }                            
+                if (iSNewSpecialist == false) { 
+                    return specialist;
                 }
-            
+            }            
             return null;
         }
+        public bool CheckDateEquality(Doctor doctor, DateTime dateTime) {
+            List<MedicalAppointment> appointments = _medicalAppointmentRepository.GetDoctorAppointments(doctor.Id);
+            foreach (MedicalAppointment appointment in appointments)
+            {
+                if (appointment.Date.Equals(dateTime))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-      
+
         #endregion
     }
 

@@ -25,13 +25,13 @@ namespace PSW_backend.Controllers
         [HttpPost("find/{priority?}")]
         public IActionResult FindMedicalAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto, string priority)
         {
-            MedicalAppointment appointment = _medicalAppointmentService.findAppointment(medicalAppointmentDto, priority);
+            MedicalAppointmentDto appointment = _medicalAppointmentService.FindAppointment(medicalAppointmentDto, priority);
             return Ok(appointment);
         }
         [HttpPost]
         public IActionResult CreateAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto)
         {
-            _medicalAppointmentService.saveAppointment(medicalAppointmentDto);
+            _medicalAppointmentService.SaveAppointment(medicalAppointmentDto);
             return Ok(medicalAppointmentDto);
         }
     }

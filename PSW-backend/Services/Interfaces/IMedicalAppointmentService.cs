@@ -9,7 +9,12 @@ namespace PSW_backend.Services.Interfaces
 {
     public interface IMedicalAppointmentService
     {
-        MedicalAppointment findAppointment(MedicalAppointmentDto medicalAppointmentDto, string priority);
-        void saveAppointment(MedicalAppointmentDto medicalAppointmentDto);
+        MedicalAppointmentDto FindAppointment(MedicalAppointmentDto medicalAppointmentDto, string priority);
+        void SaveAppointment(MedicalAppointmentDto medicalAppointmentDto);
+        DateTime FindDoctorTime(Doctor doctor, DateTime dateTime);
+        Doctor FindDoctorSpecialist(Doctor specialist, DateTime dateTime);
+        Doctor ChangeDoctor(DateTime dateTime);
+        bool CheckDateEquality(Doctor doctor, DateTime dateTime);
+
     }
 }
