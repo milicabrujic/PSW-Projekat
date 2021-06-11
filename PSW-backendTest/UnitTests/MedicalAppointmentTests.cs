@@ -153,6 +153,30 @@ namespace PSW_backendTest.UnitTests
             Doctor doctor = _medicalAppointmentService.FindDoctorSpecialist(SpecialistDoctor, currentDate);
             doctor.ShouldBeNull();
         }
+        [Fact]
+        public void Get_expected_appointment_priority_doctor()
+        {
+            MedicalAppointmentDto medicalAppointmentDto = CreateMedicalAppointmentDto();
+            medicalAppointmentDto.Date = new DateTime(2021, 11, 13, 10, 10, 00);
+            _stubMedicalAppointmentRepository.Setup(x => x.GetDoctorAppointments(medicalAppointmentDto.DoctorId)).Returns(CreateAppintments().Where(appointment => appointment.DoctorId == medicalAppointmentDto.DoctorId).ToList());
+            _stubDoctorRepository.Setup(x => x.FindById(medicalAppointmentDto.DoctorId)).Returns(CreateSpecialistDoctors().Find(doctor => doctor.Id.Equals(medicalAppointmentDto.DoctorId)));
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+            MedicalAppointmentDto foundedAppointment = _medicalAppointmentService.FindAppointment(medicalAppointmentDto, "doctor");
+            medicalAppointmentDto.Date.ShouldBe(foundedAppointment.Date);
+            
+        }
+        [Fact]
+        public void Get_differente_time_appointment_priority_doctor()
+        {
+            MedicalAppointmentDto medicalAppointmentDto = CreateMedicalAppointmentDto();
+            medicalAppointmentDto.Date = new DateTime(2021, 11, 11, 10, 10, 00);
+            _stubMedicalAppointmentRepository.Setup(x => x.GetDoctorAppointments(medicalAppointmentDto.DoctorId)).Returns(CreateAppintments().Where(appointment => appointment.DoctorId == medicalAppointmentDto.DoctorId).ToList());
+            _stubDoctorRepository.Setup(x => x.FindById(medicalAppointmentDto.DoctorId)).Returns(CreateSpecialistDoctors().Find(doctor => doctor.Id.Equals(medicalAppointmentDto.DoctorId)));
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+            MedicalAppointmentDto foundedAppointment = _medicalAppointmentService.FindAppointment(medicalAppointmentDto, "doctor");
+            medicalAppointmentDto.Date.ShouldNotBe(foundedAppointment.Date);
+
+        }
         #endregion  MedicalAppointmentTests
         #region HelperFunctions
         private MedicalAppointmentDto CreateMedicalAppointmentDto()
@@ -220,7 +244,13 @@ namespace PSW_backendTest.UnitTests
                 DoctorId = 2,
                 Date = new DateTime(2021, 10, 10, 10, 10, 00)
             });
-
+            _medicalAppointments.Add(new MedicalAppointment
+            {
+                Id = 1,
+                PatientId = 1,
+                DoctorId = 2,
+                Date = new DateTime(2021, 11, 11, 10, 10, 00)
+            });
             _medicalAppointments.Add(new MedicalAppointment
             {
                 Id = 2,
@@ -262,8 +292,23 @@ namespace PSW_backendTest.UnitTests
                 IsMalicious = false,
                 Type = DoctorType.Specialist
             });
+            _doctors.Add(new Doctor
+            {
+                Id = 2,
+                Name = "Milica",
+                Surname = "Glavas",
+                Username = "mb",
+                Email = "mb@gmail.com",
+                Password = "123",
+                Address = "Laze Teleckog 1",
+                PhoneNumber = "060000000",
+                Role = Roles.Doctor,
+                IsBlocked = false,
+                IsMalicious = false,
+                Type = DoctorType.General
+            });
 
- 
+
 
             return _doctors;
         }
