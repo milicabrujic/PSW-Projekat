@@ -15,6 +15,6 @@ namespace PSW_backend.Services.Interfaces
         Doctor FindDoctorSpecialist(Doctor specialist, DateTime dateTime);
         Doctor ChangeDoctor(DateTime dateTime);
         bool CheckDateEquality(Doctor doctor, DateTime dateTime);
-
+        List<MedicalAppointment> GetDoctorActiveAppointments(int id);
     }
 }

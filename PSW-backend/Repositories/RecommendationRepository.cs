@@ -14,6 +14,12 @@ namespace PSW_backend.Repositories
         {
             _applicationDbContext = applicationDbContext;
         }
+
+        public List<Recommendation> GetPatientRecommendation(int patientId)
+        {
+            return _applicationDbContext.Recommendations.Where(recommendation => (recommendation.PatientId.Equals(patientId) && recommendation.IsDeleted == false)).ToList();
+        }
+
         public void SaveRecommendation(Recommendation recommendation)
         {
             _applicationDbContext.Recommendations.Add(recommendation);

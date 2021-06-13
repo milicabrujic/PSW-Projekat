@@ -50,6 +50,10 @@ namespace PSW_backend.Services
             }
             return medicalAppointmentDto;
         }
+        public List<MedicalAppointment> GetDoctorActiveAppointments(int id)
+        {
+            return _medicalAppointmentRepository.GetDoctorAppointments(id);
+        }
 
         #region heplper_function
 
@@ -101,8 +105,6 @@ namespace PSW_backend.Services
             }
             return false;
         }
-
-
         #endregion
     }
 

@@ -18,6 +18,12 @@ namespace PSW_backend.Services
         {
             this._recommendationRepository = recommendationRepository;
         }
+
+        public List<Recommendation> GetPatientRecommendation(int patientId)
+        {
+            return _recommendationRepository.GetPatientRecommendation(patientId);
+        }
+
         public void SaveRecommendation(RecommendationDto recommendationDto)
         {
             Recommendation recommendation = RecommendationAdapter.RecommendatioDtoToRecommendation(recommendationDto);

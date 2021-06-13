@@ -164,15 +164,15 @@ export default {
       this.checkP = false;
     },
     specialistDoctor() {
-      this.checkP = false;
-      this.regular = false;
       let specials = this.specialists;
       this.specialists = [];
       specials.forEach((special) => {
-        this.specialists.push(special.id);
+        this.specialists.push(special.specialistDoctorId);
       });
       this.specialist = true;
       this.noTime = false;
+      this.checkP = false;
+      this.regular = false;
     },
     findAppointment() {
       this.appointment.PatientId = 1;
@@ -225,10 +225,10 @@ export default {
       });
 
     axios
-      .get("/api/doctor/specialists")
+      .get("/api/recommendation/" + 1)
       .then((doctors) => {
         this.specialists = doctors.data;
-        console.log(this.specialists);
+        console.log("ovo je recommendation" + this.specialists);
       })
       .catch((error) => {
         console.log(error);

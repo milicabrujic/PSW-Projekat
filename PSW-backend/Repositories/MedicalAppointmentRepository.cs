@@ -1,4 +1,5 @@
-﻿using PSW_backend.Models;
+﻿using PSW_backend.Enums;
+using PSW_backend.Models;
 using PSW_backend.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace PSW_backend.Repositories
         }
         public List<MedicalAppointment> GetDoctorAppointments(int doctorId)
         {
-            return _applicationDbContext.MedicalAppointments.Where(appointment => appointment.DoctorId.Equals(doctorId)).ToList();
+            return _applicationDbContext.MedicalAppointments.Where(appointment => (appointment.DoctorId.Equals(doctorId) && appointment.Status.Equals(MedicalAppointmentStatus.Active))).ToList();
         }
 
         public List<MedicalAppointment> GetPatientAppointments(int patientId)

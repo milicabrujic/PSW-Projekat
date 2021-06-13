@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PSW_backend.Dtos;
+using PSW_backend.Models;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,12 @@ namespace PSW_backend.Controllers
         {
             _recommendationService.SaveRecommendation(recommendationDto);
             return Ok(recommendationDto);
+        }
+        [HttpGet("{patientId?}")]
+        public IActionResult GetPatientRecommendation(int patientId)
+        {
+           List<Recommendation> recommendations = _recommendationService.GetPatientRecommendation(patientId);
+            return Ok(recommendations);
         }
     }
 }

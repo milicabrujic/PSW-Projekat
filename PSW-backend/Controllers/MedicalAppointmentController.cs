@@ -34,5 +34,11 @@ namespace PSW_backend.Controllers
             _medicalAppointmentService.SaveAppointment(medicalAppointmentDto);
             return Ok(medicalAppointmentDto);
         }
+        [HttpGet("activeAppointmentsDoctor/{id?}")]
+        public IActionResult GetDoctorActiveAppointments(int id)
+        {
+          List<MedicalAppointment> doctorActiveAppointments =  _medicalAppointmentService.GetDoctorActiveAppointments(id);
+            return Ok(doctorActiveAppointments);
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace PSW_backend.Repositories.Interfaces
     public interface IRecommendationRepository
     {
         void SaveRecommendation(Recommendation recommendation);
+        List<Recommendation> GetPatientRecommendation(int patientId);
     }
 }
