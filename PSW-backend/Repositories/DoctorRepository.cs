@@ -1,4 +1,5 @@
 ﻿using PSW_backend.Models;
+using PSW_backend.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,6 @@ namespace PSW_backend.Repositories
 
         public List<Doctor> DoctorSpecialists()
         {
-        //    List<Doctor> specialists = _applicationDbContext.Doctors.Where(doctor => doctor.Type.Equals(Enums.DoctorType.Specialist)).ToList();
-         //   Console.WriteLine(specialists.Count);
             return _applicationDbContext.Doctors.Where(doctor => doctor.Type.Equals(Enums.DoctorType.Specialist)).ToList();
         }
 
