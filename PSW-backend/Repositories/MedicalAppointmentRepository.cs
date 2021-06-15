@@ -1,4 +1,6 @@
-﻿using PSW_backend.Enums;
+﻿using PSW_backend.Adapters;
+using PSW_backend.Dtos;
+using PSW_backend.Enums;
 using PSW_backend.Models;
 using PSW_backend.Repositories.Interfaces;
 using System;
@@ -16,6 +18,15 @@ namespace PSW_backend.Repositories
         {
             _applicationDbContext = applicationDbContext;
         }
+
+        public MedicalAppointmentDto EndMedicalAppointment(MedicalAppointment medicalAppointment)
+        {
+            MedicalAppointment foundedAppointment = _applicationDbContext.MedicalAppointments.Find(medicalAppointment.Id);
+            foundedAppointment.Status = MedicalAppointmentStatus.Done;
+            _applicationDbContext.SaveChanges();
+            return MedicalAppointmentAdapter.MedicalAppointmentToMedicalAppointmentDto(foundedAppointment);
+        }
+
         public List<MedicalAppointment> GetDoctorAppointments(int doctorId)
         {
             return _applicationDbContext.MedicalAppointments.Where(appointment => (appointment.DoctorId.Equals(doctorId) && appointment.Status.Equals(MedicalAppointmentStatus.Active))).ToList();

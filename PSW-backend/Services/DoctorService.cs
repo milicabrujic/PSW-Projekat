@@ -16,11 +16,11 @@ namespace PSW_backend.Services
         {
             this._doctorRepository = doctorRepository;
         }
-        public Doctor getGeneralDoctor(string patientId)
+        public Doctor GetGeneralDoctor(string patientId)
         {
             return _doctorRepository.GetGeneralDoctorByPatientUsername(patientId);
         }
-        public List<Doctor> getSpecialists()
+        public List<Doctor> GetSpecialists()
         {
             return _doctorRepository.DoctorSpecialists();
         }

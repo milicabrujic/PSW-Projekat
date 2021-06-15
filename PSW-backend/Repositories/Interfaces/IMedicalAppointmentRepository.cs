@@ -1,4 +1,5 @@
-﻿using PSW_backend.Models;
+﻿using PSW_backend.Dtos;
+using PSW_backend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace PSW_backend.Repositories.Interfaces
         List<MedicalAppointment> GetDoctorAppointments(int doctorId);
         List<MedicalAppointment> GetPatientAppointments(int patientId);
         void SaveMedicalAppointment(MedicalAppointment medicalAppointment);
+        MedicalAppointmentDto EndMedicalAppointment(MedicalAppointment medicalAppointment);
     }
 }

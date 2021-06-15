@@ -40,5 +40,11 @@ namespace PSW_backend.Controllers
           List<MedicalAppointment> doctorActiveAppointments =  _medicalAppointmentService.GetDoctorActiveAppointments(id);
             return Ok(doctorActiveAppointments);
         }
+        [HttpPost("end")]
+        public IActionResult EndMedicalAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto)
+        {
+            MedicalAppointmentDto appointment = _medicalAppointmentService.EndMedicalAppointment(medicalAppointmentDto);
+            return Ok(appointment);
+        }
     }
 }

@@ -24,14 +24,14 @@ namespace PSW_backend.Controllers
         [HttpGet("patientGeneralDoctor/{patientId?}")]       // GET / patientGeneralDoctor / id
         public IActionResult GetGeneralDoctor(string patientId)
         {
-            Doctor generalDoctor = _doctorService.getGeneralDoctor(patientId);
+            Doctor generalDoctor = _doctorService.GetGeneralDoctor(patientId);
             return Ok(generalDoctor);
         }
 
         [HttpGet("specialists")]    
         public IActionResult GetSpecialists()
         {
-            List<Doctor> specialists = _doctorService.getSpecialists();
+            List<Doctor> specialists = _doctorService.GetSpecialists();
             return Ok(specialists);
         }
 

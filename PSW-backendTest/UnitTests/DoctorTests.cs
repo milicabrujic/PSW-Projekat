@@ -38,22 +38,7 @@ namespace PSW_backendTest.UnitTests
             _doctorDtos = new List<DoctorDto>();
         }
 
-        [Fact]
-        public void Finds__patient_general_doctor()
-        {
-            Patient patient = CreatePatient();
-            //Arange
-        //    _stubPatientRepository.Setup(x => x.GetPatientByUsername(patient.Username)).Returns(CreatePatients().Find(patient => patient.Username == patient.Username));
-            _stubDoctorRepository.Setup(x => x.GetGeneralDoctorByPatientUsername(patient.Username)).Returns(CreateDoctors().Find(doctor => doctor.Id == patient.GeneralDoctorId));
-            _patientService = new PatientService(_stubPatientRepository.Object);
 
-            //Act
-            Doctor doctor = _doctorService.getGeneralDoctor(patient.Username);
-
-
-            //Assert
-            doctor.ShouldNotBeNull();
-        }
         private Patient CreatePatient()
         {
             return new Patient

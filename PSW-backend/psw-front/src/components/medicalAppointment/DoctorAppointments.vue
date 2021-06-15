@@ -131,9 +131,17 @@ export default {
       this.startAppointment = true;
     },
     end() {
-      (this.createRecommendation = false),
-        (this.startAppointment = false),
-        (this.closeAppointment = false);
+      axios
+        .post("/api/medicalAppointment/end", this.appointment)
+        .then((appointment) => {
+          console.log(appointment.data);
+          this.createRecommendation = false;
+          this.startAppointment = false;
+          this.closeAppointment = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     clickRecommendation() {
       this.createRecommendation = true;

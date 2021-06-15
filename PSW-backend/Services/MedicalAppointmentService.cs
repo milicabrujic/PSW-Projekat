@@ -25,6 +25,11 @@ namespace PSW_backend.Services
             MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
             _medicalAppointmentRepository.SaveMedicalAppointment(medicalAppointment);
         }
+        public MedicalAppointmentDto EndMedicalAppointment(MedicalAppointmentDto medicalAppointmentDto)
+        {
+            MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
+            return _medicalAppointmentRepository.EndMedicalAppointment(medicalAppointment);
+        }
         public MedicalAppointmentDto FindAppointment(MedicalAppointmentDto medicalAppointmentDto, string priority)
         {
             Doctor doctor = _doctorRepository.FindById(medicalAppointmentDto.DoctorId);
@@ -105,6 +110,8 @@ namespace PSW_backend.Services
             }
             return false;
         }
+
+       
         #endregion
     }
 
