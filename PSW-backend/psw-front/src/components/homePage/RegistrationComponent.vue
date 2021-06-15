@@ -1,6 +1,10 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="RegisterDialog" max-width="600px">
+    <v-dialog
+      v-model="RegisterDialog"
+      max-width="600px"
+      v-if="this.$store.state.user.role == 'None'"
+    >
       <template v-slot:activator="{ on }">
         <v-btn text color="primary" v-on="on">
           <span>Register</span>
