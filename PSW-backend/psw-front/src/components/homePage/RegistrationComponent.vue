@@ -83,6 +83,18 @@
                 required
                 :rules="requiredRules"
               ></v-text-field>
+              <v-select
+                v-model="selectGeneralDoctor"
+                :items="generalDoctors"
+                item-text="username"
+                label="General doctor"
+                outlined
+                required
+                class="pt-4"
+                color="primary"
+                @click="getGeneralDoctors()"
+                :rules="requiredRules"
+              ></v-select>
             </v-form>
           </v-container>
         </v-card-text>
@@ -112,14 +124,16 @@ export default {
       username: "",
       email: "",
       password: "",
-      adrress: "",
+      address: "",
       phoneNumber: "",
       role: "Patient",
       isBlocked: false,
       isMalicious: false,
       canceledMedicalAppointments: 0,
-      generalDoctorId: 3,
+      generalDoctorId: null,
     },
+    generalDoctors: [],
+    selectGeneralDoctor: {},
     confirmation: "",
     requiredRules: [(v) => !!v || "This field is required"],
     passwordRules: [
@@ -146,6 +160,7 @@ export default {
   methods: {
     register() {
       if (this.$refs.form.validate()) {
+        this.findGeneralDoctorId(this.selectGeneralDoctor);
         axios
           .post("/api/patient", this.user)
           .then((response) => {
@@ -162,10 +177,31 @@ export default {
         console.log("not valid");
       }
     },
+    getGeneralDoctors() {
+      axios
+        .get("/api/doctor/generalDoctors")
+        .then((generalDoctors) => {
+          this.generalDoctors = generalDoctors.data;
+          console.log(this.generalDoctors);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     close() {
       this.RegisterDialog = false;
       this.$refs.form.reset();
     },
+    findGeneralDoctorId(selectGeneralDoctor) {
+      this.generalDoctors.forEach((generalDoctor) => {
+        if (generalDoctor.username == selectGeneralDoctor) {
+          this.user.generalDoctorId = generalDoctor.id;
+        }
+      });
+    },
+  },
+  mounted() {
+    this.getGeneralDoctors();
   },
 };
 </script>

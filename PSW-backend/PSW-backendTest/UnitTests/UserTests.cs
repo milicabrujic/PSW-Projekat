@@ -8,9 +8,7 @@ using PSW_backend.Models;
 using PSW_backend.Repositories.Interfaces;
 using PSW_backend.Services;
 using Shouldly;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace PSW_backendTest
