@@ -25,10 +25,10 @@ namespace PSW_backend.Services
             MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
             _medicalAppointmentRepository.SaveMedicalAppointment(medicalAppointment);
         }
-        public MedicalAppointmentDto EndMedicalAppointment(MedicalAppointmentDto medicalAppointmentDto)
+        public MedicalAppointment EndMedicalAppointment(MedicalAppointmentDto medicalAppointmentDto)
         {
             MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
-            return _medicalAppointmentRepository.EndMedicalAppointment(medicalAppointment);
+            return _medicalAppointmentRepository.EndMedicalAppointment(medicalAppointment); ;
         }
         public MedicalAppointmentDto FindAppointment(MedicalAppointmentDto medicalAppointmentDto, string priority)
         {

@@ -12,6 +12,6 @@ namespace PSW_backend.Repositories.Interfaces
         List<MedicalAppointment> GetDoctorAppointments(int doctorId);
         List<MedicalAppointment> GetPatientAppointments(int patientId);
         void SaveMedicalAppointment(MedicalAppointment medicalAppointment);
-        MedicalAppointmentDto EndMedicalAppointment(MedicalAppointment medicalAppointment);
+        MedicalAppointment EndMedicalAppointment(MedicalAppointment medicalAppointment);
     }
 }

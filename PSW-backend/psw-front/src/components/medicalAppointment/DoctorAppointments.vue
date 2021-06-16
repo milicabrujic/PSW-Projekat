@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <h2>Istorija posete bolnice</h2>
+      <h2>Appointments for doctor</h2>
       <v-row v-if="startAppointment == false">
         <v-col v-for="h in history" :key="h.id" md="4">
           <v-card class="mx-auto" max-width="344">
@@ -162,11 +162,11 @@ export default {
     },
   },
   mounted() {
-    this.$store.state.user.username = 2;
+    //  this.$store.state.user.username = 2;
     axios
       .get(
         "/api/medicalAppointment/activeAppointmentsDoctor/" +
-          this.$store.state.user.username
+          this.$store.state.user.id
       )
       .then((appointments) => {
         this.history = appointments.data;

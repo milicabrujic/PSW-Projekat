@@ -19,12 +19,12 @@ namespace PSW_backend.Repositories
             _applicationDbContext = applicationDbContext;
         }
 
-        public MedicalAppointmentDto EndMedicalAppointment(MedicalAppointment medicalAppointment)
+        public MedicalAppointment EndMedicalAppointment(MedicalAppointment medicalAppointment)
         {
             MedicalAppointment foundedAppointment = _applicationDbContext.MedicalAppointments.Find(medicalAppointment.Id);
             foundedAppointment.Status = MedicalAppointmentStatus.Done;
             _applicationDbContext.SaveChanges();
-            return MedicalAppointmentAdapter.MedicalAppointmentToMedicalAppointmentDto(foundedAppointment);
+            return foundedAppointment;
         }
 
         public List<MedicalAppointment> GetDoctorAppointments(int doctorId)

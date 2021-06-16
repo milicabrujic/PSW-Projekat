@@ -120,7 +120,7 @@ namespace PSW_backendTest.UnitTests
             _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
             
             //Act
-            bool DateExists = _medicalAppointmentService.CheckDateEquality(SpecialistDoctor, new DateTime(2021, 12, 10, 10, 10, 00));
+            bool DateExists = _medicalAppointmentService.CheckDateEquality(SpecialistDoctor, new DateTime(2021, 12, 12, 10, 10, 00));
 
             //Assert
             DateExists.ShouldBeFalse();
@@ -308,35 +308,40 @@ namespace PSW_backendTest.UnitTests
                 Id = 1,
                 PatientId = 1,
                 DoctorId = 2,
-                Date = new DateTime(2021, 10, 10, 10, 10, 00)
-            });
+                Date = new DateTime(2021, 10, 10, 10, 10, 00),
+                Status = MedicalAppointmentStatus.Active
+            });;
             _medicalAppointments.Add(new MedicalAppointment
             {
-                Id = 1,
+                Id = 2,
                 PatientId = 1,
                 DoctorId = 2,
-                Date = new DateTime(2021, 11, 11, 10, 10, 00)
-            });
-            _medicalAppointments.Add(new MedicalAppointment
-            {
-                Id = 2,
-                PatientId = 1,
-                DoctorId = 3,
-                Date = new DateTime(2021, 10, 10, 10, 10, 00)
-            });
-            _medicalAppointments.Add(new MedicalAppointment
-            {
-                Id = 2,
-                PatientId = 1,
-                DoctorId = 3,
-                Date = new DateTime(2021, 12, 10, 10, 10, 00)
+                Date = new DateTime(2021, 11, 11, 10, 10, 00),
+                Status = MedicalAppointmentStatus.Active
             });
             _medicalAppointments.Add(new MedicalAppointment
             {
                 Id = 3,
                 PatientId = 1,
+                DoctorId = 3,
+                Date = new DateTime(2021, 10, 10, 10, 10, 00),
+                Status = MedicalAppointmentStatus.Active
+            });
+            _medicalAppointments.Add(new MedicalAppointment
+            {
+                Id = 4,
+                PatientId = 1,
+                DoctorId = 3,
+                Date = new DateTime(2021, 12, 10, 10, 10, 00),
+                Status = MedicalAppointmentStatus.Active
+            });
+            _medicalAppointments.Add(new MedicalAppointment
+            {
+                Id = 5,
+                PatientId = 1,
                 DoctorId = 4,
-                Date = new DateTime(2021, 10, 10, 10, 10, 00)
+                Date = new DateTime(2021, 10, 10, 10, 10, 00),
+                Status = MedicalAppointmentStatus.Active
             });
 
             return _medicalAppointments;

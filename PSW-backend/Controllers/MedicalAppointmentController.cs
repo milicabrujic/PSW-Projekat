@@ -43,7 +43,7 @@ namespace PSW_backend.Controllers
         [HttpPost("end")]
         public IActionResult EndMedicalAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto)
         {
-            MedicalAppointmentDto appointment = _medicalAppointmentService.EndMedicalAppointment(medicalAppointmentDto);
+            MedicalAppointment appointment = _medicalAppointmentService.EndMedicalAppointment(medicalAppointmentDto);
             return Ok(appointment);
         }
     }

@@ -175,7 +175,7 @@ export default {
       this.regular = false;
     },
     findAppointment() {
-      this.appointment.PatientId = 1;
+      this.appointment.PatientId = this.$store.state.user.id;
       axios
         .post("/api/medicalAppointment/find/" + this.priority, this.appointment)
         .then((appointment) => {
@@ -209,7 +209,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.state.user.username = "damjan@gmail.com";
+    // this.$store.state.user.username = "damjan@gmail.com";
     axios
       .get(
         "/api/doctor/patientGeneralDoctor/" + this.$store.state.user.username
@@ -225,7 +225,7 @@ export default {
       });
 
     axios
-      .get("/api/recommendation/" + 1)
+      .get("/api/recommendation/" + this.$store.state.user.id)
       .then((doctors) => {
         this.specialists = doctors.data;
         console.log("ovo je recommendation" + this.specialists);
