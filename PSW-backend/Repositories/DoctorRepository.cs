@@ -32,5 +32,10 @@ namespace PSW_backend.Repositories
             Doctor doctor = _applicationDbContext.Doctors.FirstOrDefault(doctor => doctor.Id.Equals(patient.GeneralDoctorId));
             return doctor;
         }
+
+        public List<Doctor> GetGeneralDoctors()
+        {
+            return _applicationDbContext.Doctors.Where(doctor => doctor.Type.Equals(Enums.DoctorType.General)).ToList();
+        }
     }
 }

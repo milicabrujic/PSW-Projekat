@@ -36,14 +36,6 @@ namespace PSW_backend.Controllers
             return Ok(specialists);
         }
 
-      #region Variables
-        private IDoctorService _doctorService;
-        #endregion Variables
-        public DoctorController(IDoctorService doctorService)
-        {
-            _doctorService = doctorService;
-        }
-
         [HttpGet("generalDoctors")]
         public IActionResult GetGeneralDoctors()
         {

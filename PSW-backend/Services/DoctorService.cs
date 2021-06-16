@@ -3,7 +3,6 @@ using PSW_backend.Repositories;
 using PSW_backend.Repositories.Interfaces;
 using PSW_backend.Adapters;
 using PSW_backend.Dtos;
-using PSW_backend.Repositories;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -27,12 +26,7 @@ namespace PSW_backend.Services
         {
             return _doctorRepository.DoctorSpecialists();
         }
-        private readonly IDoctorRepository _doctorRepository;
-        public DoctorService(IDoctorRepository doctorRepository)
-        {
-            this._doctorRepository = doctorRepository;
-        }
-
+       
         public List<DoctorDto> GetGeneralDoctors()
         {
             List<DoctorDto> doctorDTOs = new List<DoctorDto>();

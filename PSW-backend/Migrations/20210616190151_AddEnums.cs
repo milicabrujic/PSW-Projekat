@@ -3,13 +3,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace PSW_backend.Migrations
 {
-    public partial class Recommendation : Migration
+    public partial class AddEnums : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "Type",
-                table: "Doctor",
+                name: "Status",
+                table: "MedicalAppointment",
                 type: "integer",
                 nullable: false,
                 defaultValue: 0);
@@ -58,8 +58,8 @@ namespace PSW_backend.Migrations
                 name: "Recommendations");
 
             migrationBuilder.DropColumn(
-                name: "Type",
-                table: "Doctor");
+                name: "Status",
+                table: "MedicalAppointment");
         }
     }
 }

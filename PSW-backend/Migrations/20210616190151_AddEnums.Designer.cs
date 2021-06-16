@@ -10,8 +10,8 @@ using PSW_backend.Models;
 namespace PSW_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210609122853_Recommendation")]
-    partial class Recommendation
+    [Migration("20210616190151_AddEnums")]
+    partial class AddEnums
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,9 @@ namespace PSW_backend.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("PatientId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
