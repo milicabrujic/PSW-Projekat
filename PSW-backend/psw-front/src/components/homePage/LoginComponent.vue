@@ -76,6 +76,7 @@ export default {
     loginDto: {
       username: "",
       password: "",
+      id: "",
     },
   }),
   methods: {

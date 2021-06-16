@@ -22,6 +22,28 @@ namespace PSW_backend.Controllers
             _doctorService = doctorService;
         }
 
+        [HttpGet("patientGeneralDoctor/{patientId?}")]       // GET / patientGeneralDoctor / id
+        public IActionResult GetGeneralDoctor(string patientId)
+        {
+            Doctor generalDoctor = _doctorService.GetGeneralDoctor(patientId);
+            return Ok(generalDoctor);
+        }
+
+        [HttpGet("specialists")]    
+        public IActionResult GetSpecialists()
+        {
+            List<Doctor> specialists = _doctorService.GetSpecialists();
+            return Ok(specialists);
+        }
+
+      #region Variables
+        private IDoctorService _doctorService;
+        #endregion Variables
+        public DoctorController(IDoctorService doctorService)
+        {
+            _doctorService = doctorService;
+        }
+
         [HttpGet("generalDoctors")]
         public IActionResult GetGeneralDoctors()
         {
@@ -30,3 +52,4 @@ namespace PSW_backend.Controllers
         }
     }
 }
+  

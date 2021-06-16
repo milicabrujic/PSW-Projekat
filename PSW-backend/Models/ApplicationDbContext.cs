@@ -19,6 +19,7 @@ namespace PSW_backend.Models
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<MedicalAppointment> MedicalAppointments { get; set; }
         public DbSet<PatientFeedback> PatientFeedback { get; set; }
+        public DbSet<Recommendation> Recommendations { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
            

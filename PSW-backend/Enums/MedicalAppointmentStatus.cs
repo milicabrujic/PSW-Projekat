@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace PSW_backend.Enums
 {
-    public enum DoctorType
+    public enum MedicalAppointmentStatus
     {
-        General,
-        Specialist       
+        Active,
+        Done,
+        Cancelled
     }
 }

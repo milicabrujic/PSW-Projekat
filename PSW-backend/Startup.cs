@@ -38,7 +38,10 @@ namespace PSW_backend
            
             services.AddSpaStaticFiles(configuration: options => { options.RootPath = "wwwroot"; });
             services.AddControllers();
-
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             // For Entity Framework  
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -49,6 +52,7 @@ namespace PSW_backend
             services.AddScoped<IAdministratorRepository, AdministratorRepository>();
             services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackRepository>();
+            services.AddScoped<IRecommendationRepository, RecommendationRepository>();
 
             //IServices
             services.AddScoped<IUserService, UserService>();
@@ -57,7 +61,8 @@ namespace PSW_backend
             services.AddScoped<IAdministratorService, AdministratorService>();
             services.AddScoped<IMedicalAppointmentService, MedicalAppointmentService>();
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
-            
+            services.AddScoped<IRecommendationService, RecommendationService>();
+
             //cors for frontend
             services.AddCors(options =>
             {

@@ -11,6 +11,7 @@ export default new Vuex.Store({
             role: "None",
             username: "",
             active: true,
+            id: ""
         },
         loggedUser: false,
         token: "",
@@ -23,6 +24,7 @@ export default new Vuex.Store({
             state.user = {};
             state.user.role = "None";
             state.user.active = true;
+            state.user.id = "";
             state.user.username = "";
             state.token = "";
             state.loggedUser = false;
