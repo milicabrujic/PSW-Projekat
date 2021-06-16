@@ -110,7 +110,7 @@ namespace PSW_backendTest.UnitTests
         }
 
         [Fact]
-        public void Gets_all_patients_controller()
+        public void Register_patient_controller()
         {
             //Arange
             PatientDto patientDto = CreatePatientDto();

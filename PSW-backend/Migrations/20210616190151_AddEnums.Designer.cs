@@ -10,8 +10,8 @@ using PSW_backend.Models;
 namespace PSW_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210605200407_AddAuthenticationTokenPropertyToUser")]
-    partial class AddAuthenticationTokenPropertyToUser
+    [Migration("20210616190151_AddEnums")]
+    partial class AddEnums
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,9 @@ namespace PSW_backend.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("PatientId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -71,6 +74,31 @@ namespace PSW_backend.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("PatientFeedback");
+                });
+
+            modelBuilder.Entity("PSW_backend.Models.Recommendation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SpecialistDoctorId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("SpecialistDoctorId");
+
+                    b.ToTable("Recommendations");
                 });
 
             modelBuilder.Entity("PSW_backend.Models.User", b =>
@@ -136,6 +164,9 @@ namespace PSW_backend.Migrations
                 {
                     b.HasBaseType("PSW_backend.Models.User");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
                     b.ToTable("Doctor");
                 });
 
@@ -184,6 +215,25 @@ namespace PSW_backend.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("PSW_backend.Models.Recommendation", b =>
+                {
+                    b.HasOne("PSW_backend.Models.Patient", "Patient")
+                        .WithMany("Recommendations")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PSW_backend.Models.Doctor", "SpecialistDoctor")
+                        .WithMany("Recommendations")
+                        .HasForeignKey("SpecialistDoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("SpecialistDoctor");
+                });
+
             modelBuilder.Entity("PSW_backend.Models.Administrator", b =>
                 {
                     b.HasOne("PSW_backend.Models.User", null)
@@ -224,6 +274,8 @@ namespace PSW_backend.Migrations
                     b.Navigation("MedicalAppointments");
 
                     b.Navigation("Patients");
+
+                    b.Navigation("Recommendations");
                 });
 
             modelBuilder.Entity("PSW_backend.Models.Patient", b =>
@@ -231,6 +283,8 @@ namespace PSW_backend.Migrations
                     b.Navigation("MedicalAppointments");
 
                     b.Navigation("PatientFeedbacks");
+
+                    b.Navigation("Recommendations");
                 });
 #pragma warning restore 612, 618
         }

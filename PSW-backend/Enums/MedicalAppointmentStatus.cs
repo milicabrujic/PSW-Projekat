@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PSW_backend.Dtos
+namespace PSW_backend.Enums
 {
-    public class DoctorDto : UserDto
+    public enum MedicalAppointmentStatus
     {
-        public string Type { get; set; }
+        Active,
+        Done,
+        Cancelled
     }
 }

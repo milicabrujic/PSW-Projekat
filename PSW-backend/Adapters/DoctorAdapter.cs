@@ -24,6 +24,7 @@ namespace PSW_backend.Adapters
             doctor.Role = (Roles)Enum.Parse(typeof(Roles), dto.Role);
             doctor.IsBlocked = dto.IsBlocked;
             doctor.IsMalicious = dto.IsMalicious;
+            doctor.Type = (DoctorType)Enum.Parse(typeof(DoctorType), dto.Type);
             return doctor;
         }
 
@@ -41,6 +42,7 @@ namespace PSW_backend.Adapters
             dto.Role = (doctor.Role.ToString());
             dto.IsBlocked = doctor.IsBlocked;
             dto.IsMalicious = doctor.IsMalicious;
+            dto.Type = (doctor.Type.ToString());
             return dto;
         }
     }
