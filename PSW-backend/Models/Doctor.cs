@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PSW_backend.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,8 +10,10 @@ namespace PSW_backend.Models
     [Table("Doctor")]
     public class Doctor : User
     {
+        public DoctorType Type { get; set; }
         public virtual ICollection<MedicalAppointment> MedicalAppointments { get; set; }
-
         public virtual ICollection<Patient> Patients { get; set; }
+
+        public virtual ICollection<Recommendation> Recommendations { get; set; }
     }
 }

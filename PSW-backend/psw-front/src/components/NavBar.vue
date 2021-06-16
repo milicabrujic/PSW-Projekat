@@ -38,7 +38,22 @@
           "
         />
       </div>
-      <v-btn text color="primary" v-if="this.$store.state.user.role != 'None'">
+      <div class="mx-2" v-if="this.$store.state.user.role == 'Patient'">
+        <router-link to="/createAppointment" class="item"
+          >Create Appointment</router-link
+        >
+      </div>
+      <div class="mx-2" v-if="this.$store.state.user.role == 'Doctor'">
+        <router-link to="/doctorAppointments" class="item"
+          >Doctor Appointments</router-link
+        >
+      </div>
+      <v-btn
+        to="/"
+        text
+        color="primary"
+        v-if="this.$store.state.user.role != 'None'"
+      >
         <span @click="logout()">Logout</span>
         <LogoutIcon></LogoutIcon>
       </v-btn>
@@ -68,6 +83,7 @@ export default {
     logout() {
       //localStorage.removeItem("loggedUser");
       this.$store.commit("logout");
+
       this.setSnackbarSuccess("You are logged out!");
       this.LoginDialog = false;
       console.log("ROLE: " + this.$store.state.user.role + " OVO JE ROLA");

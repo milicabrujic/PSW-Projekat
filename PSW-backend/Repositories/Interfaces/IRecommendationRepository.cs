@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace PSW_backend.Repositories.Interfaces
 {
-    public interface IDoctorRepository
+    public interface IRecommendationRepository
     {
-        Doctor  GetGeneralDoctorByPatientUsername(string username);
-        Doctor FindById(int doctorId);
-        List<Doctor> DoctorSpecialists();
+        void SaveRecommendation(Recommendation recommendation);
+        List<Recommendation> GetPatientRecommendation(int patientId);
     }
 }
