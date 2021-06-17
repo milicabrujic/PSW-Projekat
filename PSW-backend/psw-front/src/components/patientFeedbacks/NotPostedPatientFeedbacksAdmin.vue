@@ -36,7 +36,6 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Home",
   data() {
     return {
       patientFeedbacks: [],
@@ -59,7 +58,7 @@ export default {
     getPostedPatientFeedbacks() {
       this.postedPatientFeedbacks = this.patientFeedbacks.filter(
         (patientFeedback) => {
-          return patientFeedback.isPosted == true;
+          return patientFeedback.isPosted == false;
         }
       );
     },
