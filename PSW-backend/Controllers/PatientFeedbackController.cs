@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,22 @@ namespace PSW_backend.Controllers
     [ApiController]
     public class PatientFeedbackController : ControllerBase
     {
+        #region Variables
+        private IPatientFeedbackService _patientFeedbackService;
+        #endregion Variables
+
+        public PatientFeedbackController(IPatientFeedbackService patientFeedbackService)
+        {
+            _patientFeedbackService = patientFeedbackService;
+        }
+
+        [HttpGet()]
+        public IActionResult GetAllPatientFeedbacks()
+        {
+            if (_patientFeedbackService.GetAllPatientFeedbacks() == null)
+                return NotFound();
+            
+            return Ok(_patientFeedbackService.GetAllPatientFeedbacks());
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace PSW_backend.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(70)]
         public string Text { get; set; }
         public DateTime Date { get; set; }
         public bool IsPosted { get; set; }
