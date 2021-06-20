@@ -13,6 +13,7 @@ using Shouldly;
 using Xunit;
 using System.Linq;
 using PSW_backend.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PSW_backendTest.UnitTests
 {
@@ -243,6 +244,22 @@ namespace PSW_backendTest.UnitTests
             medicalAppointmentDtoForCheck.Date.ShouldNotBe(foundedAppointment.Date);
 
         }
+        [Fact]
+        public void Get_active_doctor_appointments()
+        {
+            MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
+            //Arange
+            _stubMedicalAppointmentRepository.Setup(x => x.GetDoctorAppointments(dto.DoctorId)).Returns(CreateAppintments().Where(appointment => appointment.DoctorId.Equals(dto.DoctorId)).ToList());
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+            _medicalAppointmentController = new MedicalAppointmentController(_medicalAppointmentService);
+
+            //Act
+            var actionResult = _medicalAppointmentController.GetDoctorActiveAppointments(dto.DoctorId);
+
+            //Assert
+            ((actionResult as OkObjectResult).Value as List<MedicalAppointment>).Count.ShouldBeGreaterThan(0);
+
+        }
         #endregion  MedicalAppointmentTests
         #region HelperFunctions
         private MedicalAppointmentDto CreateMedicalAppointmentDto()
@@ -383,7 +400,7 @@ namespace PSW_backendTest.UnitTests
 
             return _doctors;
         }
-
+      
         #endregion HelperFunctions
     }
 }

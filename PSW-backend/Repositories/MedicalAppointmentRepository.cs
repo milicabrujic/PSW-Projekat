@@ -19,6 +19,14 @@ namespace PSW_backend.Repositories
             _applicationDbContext = applicationDbContext;
         }
 
+        public MedicalAppointment CancelMedicalAppointment(int id)
+        {
+            MedicalAppointment foundedAppointment = _applicationDbContext.MedicalAppointments.Find(id);
+            foundedAppointment.Status = MedicalAppointmentStatus.Cancelled;
+            _applicationDbContext.SaveChanges();
+            return foundedAppointment;
+        }
+
         public MedicalAppointment EndMedicalAppointment(MedicalAppointment medicalAppointment)
         {
             MedicalAppointment foundedAppointment = _applicationDbContext.MedicalAppointments.Find(medicalAppointment.Id);
@@ -35,6 +43,11 @@ namespace PSW_backend.Repositories
         public List<MedicalAppointment> GetPatientAppointments(int patientId)
         {
             return _applicationDbContext.MedicalAppointments.Where(appointment => appointment.PatientId.Equals(patientId)).ToList();
+        }
+
+        public List<MedicalAppointment> GetPatientMedicalAppointments(int id)
+        {
+            return _applicationDbContext.MedicalAppointments.Where(appointment => appointment.PatientId.Equals(id)).ToList();
         }
 
         public void SaveMedicalAppointment(MedicalAppointment medicalAppointment)
