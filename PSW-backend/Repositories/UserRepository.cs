@@ -25,6 +25,7 @@ namespace PSW_backend.Repositories
         {
             return _applicationDbContext.Users.FirstOrDefault(user => user.Password.Equals(password));
         }
+
         public List<User> GetAll()
         {
             return _applicationDbContext.Users.ToList();

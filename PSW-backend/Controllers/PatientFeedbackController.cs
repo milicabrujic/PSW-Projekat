@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PSW_backend.Dtos;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,17 @@ namespace PSW_backend.Controllers
                 return NotFound();
             
             return Ok(_patientFeedbackService.GetAllPatientFeedbacks());
+        }
+
+        [HttpPut()]
+        public IActionResult ChangePatientFeedbackStatus([FromBody] PatientFeedbackDto patientFeedbackDto)
+        {
+            PatientFeedbackDto _patientFeedbackChangedStatusDto = _patientFeedbackService.ChangePatientFeedbackStatus(patientFeedbackDto);
+
+            if (_patientFeedbackChangedStatusDto == null)
+                return NotFound();
+
+            return Ok(_patientFeedbackChangedStatusDto);
         }
     }
 }

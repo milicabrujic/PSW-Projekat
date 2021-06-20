@@ -20,5 +20,15 @@ namespace PSW_backend.Repositories
         {
             return _applicationDbContext.PatientFeedback.OrderByDescending(patientFeedback => patientFeedback.Date).ToList(); 
         }
+
+        public void SaveChangedPatientFeedback(PatientFeedback patientFeedback)
+        {
+            _applicationDbContext.SaveChanges();
+        }
+
+        public PatientFeedback GetPatientFeedbackById(int id)
+        {
+            return _applicationDbContext.PatientFeedback.FirstOrDefault(patientFeedback => patientFeedback.Id.Equals(id));
+        }
     }
 }
