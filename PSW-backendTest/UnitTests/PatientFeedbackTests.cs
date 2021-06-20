@@ -93,6 +93,103 @@ namespace PSW_backendTest.UnitTests
         }
         #endregion GetAllFeedbacksTests
 
+        #region ChangePatientFeedbackStatusTests
+        [Fact]
+        public void Checks_if_patient_feedback_exists_true()
+        {
+            //Arange
+            PatientFeedback patientFeedback = CreatePatientFeedback();
+            PatientFeedbackDto patientFeedbackDto = new PatientFeedbackDto {
+                Id = patientFeedback.Id,
+                Text = "Great doctors.",
+                Date = DateTime.Now,
+                IsPosted = false,
+                PatientId = 1
+            };
+
+            ArrangeForCheckingIfPatientFeedbackExistsTests(patientFeedbackDto);
+
+            //Act
+            PatientFeedback ValidPatientFeedback = _patientFeedbackService.CheckIfPatientFeedbackExists(patientFeedbackDto);
+
+            //Assert
+            ValidPatientFeedback.ShouldNotBeNull();
+            ValidPatientFeedback.ShouldBeOfType<PatientFeedback>();
+        }
+
+        [Fact]
+        public void Checks_if_patient_feedback_exists_false()
+        {
+            //Arange
+            PatientFeedbackDto patientFeedbackDto = new PatientFeedbackDto
+            {
+                Id = -5,
+                Text = "Great doctors.",
+                Date = DateTime.Now,
+                IsPosted = false,
+                PatientId = 1
+            };
+
+            ArrangeForCheckingIfPatientFeedbackExistsTests(patientFeedbackDto);
+
+            //Act
+            PatientFeedback ValidPatientFeedback = _patientFeedbackService.CheckIfPatientFeedbackExists(patientFeedbackDto);
+
+            //Assert
+            ValidPatientFeedback.ShouldBeNull();
+            ValidPatientFeedback.ShouldNotBeOfType<PatientFeedback>();
+        }
+
+        [Fact]
+        public void Checks_if_patient_status_is_changed_true()
+        {
+            //Arange
+            PatientFeedback patientFeedback = CreatePatientFeedback();
+            PatientFeedback patientFeedbackTemp = CreatePatientFeedback();
+            PatientFeedbackDto patientFeedbackDto = new PatientFeedbackDto
+            {
+                Id = patientFeedback.Id,
+                Text = "Great doctors.",
+                Date = DateTime.Now,
+                IsPosted = patientFeedback.IsPosted,
+                PatientId = 1
+            };
+
+            ArrangeForCheckingIfStatusChangedSuccessfullyTests(patientFeedback);
+
+            //Act
+            PatientFeedbackDto changedPatientFeedback = _patientFeedbackService.ChangeStatus(patientFeedback, patientFeedbackDto);
+
+            //Assert
+            changedPatientFeedback.IsPosted.ShouldNotBe(patientFeedbackTemp.IsPosted);
+        }
+
+        [Fact]
+        public void Checks_if_patient_status_is_changed_false()
+        {
+            //Arange
+            PatientFeedback patientFeedback = CreatePatientFeedback();
+            PatientFeedback patientFeedbackTemp = CreatePatientFeedback();
+            PatientFeedbackDto patientFeedbackDto = new PatientFeedbackDto
+            {
+                Id = patientFeedback.Id,
+                Text = "Great doctors.",
+                Date = DateTime.Now,
+                IsPosted = !patientFeedback.IsPosted,
+                PatientId = 1
+            };
+
+            ArrangeForCheckingIfStatusChangedSuccessfullyTests(patientFeedback);
+
+            //Act
+            PatientFeedbackDto changedPatientFeedback = _patientFeedbackService.ChangeStatus(patientFeedback, patientFeedbackDto);
+
+            //Assert
+            changedPatientFeedback.IsPosted.ShouldBe(patientFeedbackTemp.IsPosted);
+        }
+
+        #endregion ChangePatientFeedbackStatus
+
         #region HelperFunctions
         private List<PatientFeedback> CreatePatientFeedbacks()
         {
@@ -156,6 +253,19 @@ namespace PSW_backendTest.UnitTests
             _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
             _patientFeedbackController = new PatientFeedbackController(_patientFeedbackService);
         }
+
+        private void ArrangeForCheckingIfPatientFeedbackExistsTests(PatientFeedbackDto patientFeedbackDto)
+        {
+            _stubPatientFeedbackRepository.Setup(x => x.GetPatientFeedbackById(patientFeedbackDto.Id)).Returns(CreatePatientFeedbacks().Find(patientFeedback => patientFeedback.Id == patientFeedbackDto.Id));
+            _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
+        }
+       
+        private void ArrangeForCheckingIfStatusChangedSuccessfullyTests(PatientFeedback patientFeedback)
+        {
+            _stubPatientFeedbackRepository.Setup(x => x.SaveChangedPatientFeedback(It.IsAny<PatientFeedback>()));
+            _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
+        }
+
         #endregion HelperFunctions
     }
 }
