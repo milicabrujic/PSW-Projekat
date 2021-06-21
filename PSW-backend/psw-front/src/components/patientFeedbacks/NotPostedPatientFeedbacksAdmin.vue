@@ -26,6 +26,16 @@
                 Posted on: {{ String(patientFeedback.date).substring(0, 10) }}
               </p>
             </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                icon
+                color="primary"
+                class="mt-12 mr-4"
+                @click="changeStatus(patientFeedback)"
+                >POST</v-btn
+              >
+            </v-card-actions>
           </v-card>
         </v-flex>
       </v-layout>
@@ -36,7 +46,6 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Home",
   data() {
     return {
       patientFeedbacks: [],
@@ -56,10 +65,21 @@ export default {
           console.log(error);
         });
     },
+    changeStatus(patientFeedback) {
+      axios
+        .put("/api/patientfeedback", patientFeedback)
+        .then((patientFeedback) => {
+          console.log(patientFeedback.data);
+          this.getPatientFeedbacks();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getPostedPatientFeedbacks() {
       this.postedPatientFeedbacks = this.patientFeedbacks.filter(
         (patientFeedback) => {
-          return patientFeedback.isPosted == true;
+          return patientFeedback.isPosted == false;
         }
       );
     },

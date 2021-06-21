@@ -53,6 +53,16 @@
           >Patient Appointments</router-link
         >
       </div>
+      <div class="mx-2" v-if="this.$store.state.user.role == 'Administrator'">
+        <router-link to="/postedPatientFeedbacksAdmin" class="item"
+          >Posted Patient Feedbacks</router-link
+        >
+      </div>
+      <div class="mx-2" v-if="this.$store.state.user.role == 'Administrator'">
+        <router-link to="/notPostedPatientFeedbacksAdmin" class="item"
+          >Not Posted Patient Feedbacks</router-link
+        >
+      </div>
       <v-btn
         to="/"
         text

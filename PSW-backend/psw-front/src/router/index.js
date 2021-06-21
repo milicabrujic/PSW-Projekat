@@ -4,6 +4,9 @@ import HomePage from '../views/HomePage.vue'
 import MedicalAppointment from '../components/medicalAppointment/MedicalAppointment.vue'
 import DoctorAppointments from '../components/medicalAppointment/DoctorAppointments.vue'
 import PatientAppointments from '../components/medicalAppointment/PatientAppointments.vue'
+import PostedPatientFeedbacksAdmin from '../components/patientFeedbacks/PostedPatientFeedbacksAdmin.vue'
+import NotPostedPatientFeedbacksAdmin from '../components/patientFeedbacks/NotPostedPatientFeedbacksAdmin.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,8 +29,17 @@ const routes = [
     path: '/patientAppointments',
     name: 'Patient Appointments',
     component: PatientAppointments
-  }
-]
+  },
+  {
+    path: '/postedPatientFeedbacksAdmin',
+    name: 'Posted Patient Feedbacks Admin',
+    component: PostedPatientFeedbacksAdmin
+  },
+  {
+    path: '/notPostedPatientFeedbacksAdmin',
+    name: 'Not Posted Patient Feedbacks Admin',
+    component: NotPostedPatientFeedbacksAdmin
+  }]
 
 const router = new VueRouter({
   mode: 'history',
