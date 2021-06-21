@@ -104,7 +104,7 @@ namespace PSW_backend.Services
             return null;
         }
         public bool CheckDateEquality(Doctor doctor, DateTime dateTime) {
-            List<MedicalAppointment> appointments = _medicalAppointmentRepository.GetDoctorAppointments(doctor.Id);
+            List<MedicalAppointment> appointments = GetDoctorActiveAppointments(doctor.Id);
             foreach (MedicalAppointment appointment in appointments)
             {
                 if (appointment.Date.Equals(dateTime))

@@ -188,6 +188,7 @@ namespace PSW_backendTest.UnitTests
             _stubDoctorRepository.Setup(x => x.DoctorSpecialists()).Returns(CreateSpecialistDoctors().Where(doctor => doctor.Type.Equals(PSW_backend.Enums.DoctorType.Specialist)).ToList());
             _stubMedicalAppointmentRepository.Setup(x => x.GetDoctorAppointments(3)).Returns(CreateAppintments().Where(appointment => appointment.DoctorId == 3).ToList());
             _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+           
             DateTime currentDate = new DateTime(2021, 10, 10, 10, 10, 00);
 
             //Act
@@ -205,6 +206,7 @@ namespace PSW_backendTest.UnitTests
 
             _stubMedicalAppointmentRepository.Setup(x => x.GetDoctorAppointments(SpecialistDoctor.Id)).Returns(CreateAppintments().Where(appointment => appointment.DoctorId == SpecialistDoctor.Id).ToList());
             _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+           
             DateTime currentDate = new DateTime(2021, 11, 10, 10, 10, 00);
 
             //Act
@@ -222,6 +224,7 @@ namespace PSW_backendTest.UnitTests
             _stubDoctorRepository.Setup(x => x.DoctorSpecialists()).Returns(CreateSpecialistDoctors().Where(doctor => doctor.Type.Equals(PSW_backend.Enums.DoctorType.Specialist)).ToList());
             _stubMedicalAppointmentRepository.Setup(x => x.GetDoctorAppointments(SpecialistDoctor.Id)).Returns(CreateAppintments().Where(appointment => appointment.DoctorId == SpecialistDoctor.Id).ToList());
             _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+           
             DateTime currentDate = new DateTime(2021, 10, 10, 10, 10, 00);
 
             //Act
@@ -286,6 +289,7 @@ namespace PSW_backendTest.UnitTests
         public void Cancel_medical_appointment_appointments()
         {
             MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
+
             //Arange
             _stubMedicalAppointmentRepository.Setup(x => x.CancelMedicalAppointment(dto.Id)).Returns(CreateAppintments().Find(appointment => appointment.Id.Equals(dto.Id)));
             _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);

@@ -60,6 +60,14 @@ export default {
       axios
         .post("/api/medicalAppointment/cancelAppointment/" + id)
         .then((appointment) => {
+          axios
+            .get("/api/medicalAppointment/proba")
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           console.log(appointment.data);
           window.location.reload();
         })
