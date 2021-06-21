@@ -17,5 +17,7 @@ namespace PSW_backend.Services.Interfaces
         bool CheckDateEquality(Doctor doctor, DateTime dateTime);
         List<MedicalAppointment> GetDoctorActiveAppointments(int id);
         MedicalAppointment EndMedicalAppointment(MedicalAppointmentDto medicalAppointmentDto);
+        List<MedicalAppointmentHistoryDto> GetPatientAppointments(int id);
+        MedicalAppointmentDto CancelMedicalAppointment(int id);
     }
 }

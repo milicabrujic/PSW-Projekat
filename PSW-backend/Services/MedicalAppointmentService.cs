@@ -30,6 +30,10 @@ namespace PSW_backend.Services
             MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
             return _medicalAppointmentRepository.EndMedicalAppointment(medicalAppointment); ;
         }
+        public MedicalAppointmentDto CancelMedicalAppointment(int id)
+        {           
+            return  MedicalAppointmentAdapter.MedicalAppointmentToMedicalAppointmentDto(_medicalAppointmentRepository.CancelMedicalAppointment(id));
+        }
         public MedicalAppointmentDto FindAppointment(MedicalAppointmentDto medicalAppointmentDto, string priority)
         {
             Doctor doctor = _doctorRepository.FindById(medicalAppointmentDto.DoctorId);
@@ -100,7 +104,7 @@ namespace PSW_backend.Services
             return null;
         }
         public bool CheckDateEquality(Doctor doctor, DateTime dateTime) {
-            List<MedicalAppointment> appointments = _medicalAppointmentRepository.GetDoctorAppointments(doctor.Id);
+            List<MedicalAppointment> appointments = GetDoctorActiveAppointments(doctor.Id);
             foreach (MedicalAppointment appointment in appointments)
             {
                 if (appointment.Date.Equals(dateTime))
@@ -111,7 +115,12 @@ namespace PSW_backend.Services
             return false;
         }
 
-       
+        public List<MedicalAppointmentHistoryDto> GetPatientAppointments(int id)
+        {
+            List<MedicalAppointmentHistoryDto> medicalAppointmentHistoryDtos = new List<MedicalAppointmentHistoryDto>();
+            _medicalAppointmentRepository.GetPatientMedicalAppointments(id).ForEach(appointment => medicalAppointmentHistoryDtos.Add(MedicalAppointmentAdapter.MedicalAppointmentToMedicalAppointmentHistoryDto(appointment)));
+            return medicalAppointmentHistoryDtos;
+        }
         #endregion
     }
 
