@@ -41,5 +41,12 @@ namespace PSW_backend.Controllers
 
             return Ok(_patientFeedbackChangedStatusDto);
         }
+
+        [HttpPost()]
+        public IActionResult RegisterPatient([FromBody] PatientFeedbackDto patientFeedbackDto)
+        {
+            _patientFeedbackService.SaveNewPatientFeedback(patientFeedbackDto);
+            return Ok(patientFeedbackDto);
+        }
     }
 }

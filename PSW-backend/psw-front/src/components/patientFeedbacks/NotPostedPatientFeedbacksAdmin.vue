@@ -20,7 +20,7 @@
                 {{ patientFeedback.text }}
               </p>
               <div class="text--primary">
-                <h3>Posted by: {{ patientFeedback.patientId }}</h3>
+                <h3>Posted by: {{ patientFeedback.patientUsername }}</h3>
               </div>
               <p>
                 Posted on: {{ String(patientFeedback.date).substring(0, 10) }}

@@ -13,6 +13,8 @@ namespace PSW_backend.Services.Interfaces
         public PatientFeedbackDto ChangePatientFeedbackStatus(PatientFeedbackDto patientFeedbackDto);
         public PatientFeedback CheckIfPatientFeedbackExists(PatientFeedbackDto patientFeedbackDto);
         public PatientFeedbackDto ChangeStatus(PatientFeedback patientFeedback, PatientFeedbackDto patientFeedbackDto);
+        public PatientFeedbackDto SaveNewPatientFeedback(PatientFeedbackDto patientFeedbackDto);
+        public void setUsernames(List<PatientFeedbackDto> patientFeedbackDTOs);
 
     }
 }

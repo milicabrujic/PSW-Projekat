@@ -13,10 +13,13 @@ namespace PSW_backend.Services
     public class PatientFeedbackService : IPatientFeedbackService
     {
         private readonly IPatientFeedbackRepository _patientFeedbackRepository;
+        private readonly IPatientRepository _patientRepository;
 
-        public PatientFeedbackService(IPatientFeedbackRepository patientFeedbackRepository)
+
+        public PatientFeedbackService(IPatientFeedbackRepository patientFeedbackRepository, IPatientRepository patientRepository)
         {
             this._patientFeedbackRepository = patientFeedbackRepository;
+            this._patientRepository = patientRepository;
         }
 
         public List<PatientFeedbackDto> GetAllPatientFeedbacks()
@@ -24,6 +27,8 @@ namespace PSW_backend.Services
             List<PatientFeedbackDto> patientFeedbackDTOs = new List<PatientFeedbackDto>();
 
             _patientFeedbackRepository.GetAll().ForEach(patientFeedback => patientFeedbackDTOs.Add(PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(patientFeedback)));
+
+            setUsernames(patientFeedbackDTOs);
 
             return patientFeedbackDTOs;
         }
@@ -54,6 +59,22 @@ namespace PSW_backend.Services
             _patientFeedbackRepository.SaveChangedPatientFeedback(patientFeedback);
 
             return PatientFeedbackAdapter.PatientFeedbackToPatientFeedbackDto(patientFeedback);
+        }
+
+        public PatientFeedbackDto SaveNewPatientFeedback(PatientFeedbackDto patientFeedbackDto)
+        {
+            PatientFeedback patientFeedback = PatientFeedbackAdapter.PatientFeedbackDtoToPatientFeedback(patientFeedbackDto);
+            _patientFeedbackRepository.SaveNewPatientFeedback(patientFeedback);
+
+            return patientFeedbackDto;
+        }
+
+        public void setUsernames(List<PatientFeedbackDto> patientFeedbackDTOs)
+        {
+            foreach (PatientFeedbackDto patientFeedbackDto in patientFeedbackDTOs)
+            {
+                patientFeedbackDto.PatientUsername = _patientRepository.GetPatientById(patientFeedbackDto.PatientId).Username;
+            }
         }
     }
 }

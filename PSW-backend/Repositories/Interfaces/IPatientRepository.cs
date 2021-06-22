@@ -10,6 +10,7 @@ namespace PSW_backend.Repositories.Interfaces
     {
         Patient GetPatientByUsername(string username);
         Patient GetPatientByEmail(string email);
+        Patient GetPatientById(int id);
         List<Patient> GetAll();
         void SavePatient(Patient patient);
     }
