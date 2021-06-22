@@ -30,5 +30,11 @@ namespace PSW_backend.Repositories
         {
             return _applicationDbContext.PatientFeedback.FirstOrDefault(patientFeedback => patientFeedback.Id.Equals(id));
         }
+        
+        public void SaveNewPatientFeedback(PatientFeedback patientFeedback)
+        {
+            _applicationDbContext.PatientFeedback.Add(patientFeedback);
+            _applicationDbContext.SaveChanges();
+        }
     }
 }

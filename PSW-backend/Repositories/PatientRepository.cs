@@ -26,6 +26,11 @@ namespace PSW_backend.Repositories
             return _applicationDbContext.Patients.FirstOrDefault(patient => patient.Username.Equals(username));
         }
 
+        public Patient GetPatientById(int id)
+        {
+            return _applicationDbContext.Patients.FirstOrDefault(patient => patient.Id.Equals(id));
+        }
+
         public List<Patient> GetAll()
         {
             return _applicationDbContext.Patients.ToList();

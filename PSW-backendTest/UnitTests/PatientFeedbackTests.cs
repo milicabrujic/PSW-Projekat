@@ -188,6 +188,31 @@ namespace PSW_backendTest.UnitTests
             changedPatientFeedback.IsPosted.ShouldBe(patientFeedbackTemp.IsPosted);
         }
 
+        //[Fact]
+        //public void Change_patient_feedback_status_controller()
+        //{
+        //    //Arange
+        //    PatientFeedbackDto patientFeedbackDto = CreatePatientFeedbackDto();
+        //    PatientFeedbackDto patientFeedbackDtoTemp = new PatientFeedbackDto
+        //    {
+        //        Id = patientFeedbackDto.Id,
+        //        Text = patientFeedbackDto.Text,
+        //        Date = patientFeedbackDto.Date,
+        //        IsPosted = !patientFeedbackDto.IsPosted,
+        //        PatientId = patientFeedbackDto.PatientId
+        //    };
+        //    _stubPatientFeedbackRepository.Setup(x => x.GetPatientFeedbackById(patientFeedbackDto.Id)).Returns(CreatePatientFeedbacks().Find(patientFeedback => patientFeedback.Id == patientFeedbackDto.Id));
+        //    _stubPatientFeedbackRepository.Setup(x => x.SaveChangedPatientFeedback(It.IsAny<PatientFeedback>()));
+        //    _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
+        //    _patientFeedbackController = new PatientFeedbackController(_patientFeedbackService);
+
+        //    //Act
+        //    var actionResult = _patientFeedbackController.ChangePatientFeedbackStatus(patientFeedbackDto);
+          
+        //    //Assert
+        //    ((actionResult as OkObjectResult).Value as PatientFeedbackDto).ShouldBeEquivalentTo(patientFeedbackDto);
+        //}   
+        
         #endregion ChangePatientFeedbackStatus
 
         #region HelperFunctions

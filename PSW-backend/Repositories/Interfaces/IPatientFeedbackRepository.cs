@@ -11,5 +11,7 @@ namespace PSW_backend.Repositories.Interfaces
         List<PatientFeedback> GetAll();
         void SaveChangedPatientFeedback(PatientFeedback patientFeedback);
         PatientFeedback GetPatientFeedbackById(int id);
+        public void SaveNewPatientFeedback(PatientFeedback patientFeedback);
+
     }
 }

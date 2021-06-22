@@ -58,6 +58,11 @@
           >Not Posted Patient Feedbacks</router-link
         >
       </div>
+      <div class="mx-2" v-if="this.$store.state.user.role == 'Patient'">
+        <router-link to="/addNewFeedback" class="item"
+          >Add Feedback</router-link
+        >
+      </div>
       <v-btn
         to="/"
         text

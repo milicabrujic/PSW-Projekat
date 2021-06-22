@@ -5,6 +5,8 @@ import MedicalAppointment from '../components/medicalAppointment/MedicalAppointm
 import DoctorAppointments from '../components/medicalAppointment/DoctorAppointments.vue'
 import PostedPatientFeedbacksAdmin from '../components/patientFeedbacks/PostedPatientFeedbacksAdmin.vue'
 import NotPostedPatientFeedbacksAdmin from '../components/patientFeedbacks/NotPostedPatientFeedbacksAdmin.vue'
+import AddNewFeedback from '../components/patientFeedbacks/AddNewFeedback.vue'
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -31,6 +33,11 @@ const routes = [{
         path: '/notPostedPatientFeedbacksAdmin',
         name: 'Not Posted Patient Feedbacks Admin',
         component: NotPostedPatientFeedbacksAdmin
+    },
+    {
+        path: '/addNewFeedback',
+        name: 'Add New Feedback',
+        component: AddNewFeedback
     }
 ]
 

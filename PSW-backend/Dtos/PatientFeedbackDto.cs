@@ -12,5 +12,6 @@ namespace PSW_backend.Dtos
         public DateTime Date { get; set; }
         public bool IsPosted { get; set; }
         public int PatientId { get; set; }
+        public string PatientUsername { get; set; }
     }
 }
