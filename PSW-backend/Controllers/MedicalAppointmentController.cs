@@ -40,11 +40,29 @@ namespace PSW_backend.Controllers
           List<MedicalAppointment> doctorActiveAppointments =  _medicalAppointmentService.GetDoctorActiveAppointments(id);
             return Ok(doctorActiveAppointments);
         }
+        [HttpGet("appointmentsPatient/{id?}")]
+        public IActionResult GetPatientAppointments(int id)
+        {
+            List<MedicalAppointmentHistoryDto> medicalAppointmentsPatient = _medicalAppointmentService.GetPatientAppointments(id);
+            return Ok(medicalAppointmentsPatient);
+        }
         [HttpPost("end")]
         public IActionResult EndMedicalAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto)
         {
             MedicalAppointment appointment = _medicalAppointmentService.EndMedicalAppointment(medicalAppointmentDto);
             return Ok(appointment);
+        }
+        [HttpPost("cancelAppointment/{id?}")]
+        public IActionResult CancelMedicalAppointment(int id)
+        {
+            MedicalAppointmentDto appointmentDto = _medicalAppointmentService.CancelMedicalAppointment(id);
+            return Ok(appointmentDto);
+        }
+        [HttpGet("proba")]
+        public IActionResult proba()
+        {
+            Console.WriteLine("hello from porba");
+            return Ok();
         }
     }
 }

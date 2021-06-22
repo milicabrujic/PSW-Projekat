@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import MedicalAppointment from '../components/medicalAppointment/MedicalAppointment.vue'
 import DoctorAppointments from '../components/medicalAppointment/DoctorAppointments.vue'
+import PatientAppointments from '../components/medicalAppointment/PatientAppointments.vue'
 import PostedPatientFeedbacksAdmin from '../components/patientFeedbacks/PostedPatientFeedbacksAdmin.vue'
 import NotPostedPatientFeedbacksAdmin from '../components/patientFeedbacks/NotPostedPatientFeedbacksAdmin.vue'
 import AddNewFeedback from '../components/patientFeedbacks/AddNewFeedback.vue'
@@ -23,6 +24,11 @@ const routes = [{
         path: '/doctorAppointments',
         name: 'Doctor Appointments',
         component: DoctorAppointments
+    },
+    {
+        path: '/patientAppointments',
+        name: 'Patient Appointments',
+        component: PatientAppointments
     },
     {
         path: '/postedPatientFeedbacksAdmin',
