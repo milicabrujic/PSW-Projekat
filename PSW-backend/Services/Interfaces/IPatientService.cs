@@ -10,5 +10,7 @@ namespace PSW_backend.Services.Interfaces
     {
         bool CheckIfPatientExists(string username, string email);
         void RegisterPatient(PatientDto patientDto);
+        void CheckMaliciousPatient(string username);
+        void BlockPatient(string username);
     }
 }

@@ -61,7 +61,7 @@ export default {
         .post("/api/medicalAppointment/cancelAppointment/" + id)
         .then((appointment) => {
           axios
-            .get("/api/medicalAppointment/proba")
+            .get("/api/patient/malicious/" + this.$store.state.user.username)
             .then((response) => {
               console.log(response);
             })

@@ -16,5 +16,7 @@ namespace PSW_backend.Models
         public int GeneralDoctorId { get; set; }
         public virtual Doctor GeneralDoctor { get; set; }
         public virtual ICollection<Recommendation> Recommendations { get; set; }
+        
+        public DateTime LastCanceledDate { get; set; }
     }
 }

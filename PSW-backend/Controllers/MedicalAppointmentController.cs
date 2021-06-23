@@ -58,11 +58,6 @@ namespace PSW_backend.Controllers
             MedicalAppointmentDto appointmentDto = _medicalAppointmentService.CancelMedicalAppointment(id);
             return Ok(appointmentDto);
         }
-        [HttpGet("proba")]
-        public IActionResult proba()
-        {
-            Console.WriteLine("hello from porba");
-            return Ok();
-        }
+       
     }
 }

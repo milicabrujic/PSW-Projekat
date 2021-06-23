@@ -41,5 +41,37 @@ namespace PSW_backend.Repositories
             _applicationDbContext.Patients.Add(patient);
             _applicationDbContext.SaveChanges();
         }
+
+        public void UpdateMaliciousPatient(Patient patientFoundByUsername, bool checkDates)
+        {
+            if (checkDates)
+            {
+                patientFoundByUsername.LastCanceledDate = DateTime.Now;
+                patientFoundByUsername.CancelledMedicalAppointments = 1;
+                _applicationDbContext.SaveChanges();
+            }
+            else { 
+                if(patientFoundByUsername.CancelledMedicalAppointments == 2)
+                {
+                    patientFoundByUsername.LastCanceledDate = DateTime.Now;
+                    patientFoundByUsername.CancelledMedicalAppointments = 3;
+                    patientFoundByUsername.IsMalicious = true;
+                    _applicationDbContext.SaveChanges();
+                }
+                else
+                {
+                    patientFoundByUsername.LastCanceledDate = DateTime.Now;
+                    patientFoundByUsername.CancelledMedicalAppointments++;
+                    _applicationDbContext.SaveChanges();
+                }
+            }
+        }
+
+        public void BlockPatient(string username)
+        {
+            Patient patient = GetPatientByUsername(username);
+            patient.IsBlocked = true;
+            _applicationDbContext.SaveChanges();
+        }
     }
 }
