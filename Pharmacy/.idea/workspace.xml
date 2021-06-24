@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:github" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8b67da93-2033-40c6-9c5c-3db149a40d3c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Adapters/AdministratorAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Adapters/DoctorAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Adapters/MedicalAppointmentAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Adapters/PatientAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Adapters/PatientFeedbackAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Adapters/RecommendationAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Adapters/UserAdapter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Controllers/AdministratorController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Controllers/DoctorController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Controllers/MedicalAppointmentController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Controllers/PatientController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Controllers/PatientFeedbackController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Controllers/RecommendationController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Controllers/UserController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/AdministratorDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/DoctorDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/LoginDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/MedicalAppointmentDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/MedicalAppointmentHistoryDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/PatientDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/PatientFeedbackDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/RecommendationDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Dtos/UserDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Enums/DoctorType.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Enums/MedicalAppointmentStatus.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Enums/Roles.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Migrations/20210604162041_InitialDbMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Migrations/20210604162041_InitialDbMigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Migrations/20210616190151_AddEnums.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Migrations/20210616190151_AddEnums.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/Administrator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/ApplicationDbContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/Doctor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/MedicalAppointment.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/Patient.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/PatientFeedback.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/Recommendation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Models/User.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/PSW-backend.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/AdministratorRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/DoctorRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/Interfaces/IAdministratorRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/Interfaces/IDoctorRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/Interfaces/IMedicalAppointmentRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/Interfaces/IPatientFeedbackRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/Interfaces/IPatientRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/Interfaces/IRecommendationRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/Interfaces/IUserRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/MedicalAppointmentRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/PatientFeedbackRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/PatientRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/RecommendationRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Repositories/UserRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/AdministratorService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/DoctorService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/Interfaces/IAdministratorService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/Interfaces/IDoctorService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/Interfaces/IMedicalAppointmentService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/Interfaces/IPatientFeedbackService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/Interfaces/IPatientService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/Interfaces/IRecommendationService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/Interfaces/IUserService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/MedicalAppointmentService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/PatientFeedbackService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/PatientService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/RecommendationService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Services/UserService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/Startup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/WeatherForecast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/assets/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/NavBar.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/homePage/LoginComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/homePage/RegistrationComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/medicalAppointment/DoctorAppointments.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/medicalAppointment/MedicalAppointment.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/medicalAppointment/PatientAppointments.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/patientFeedbacks/AddNewFeedback.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/patientFeedbacks/NotPostedPatientFeedbacksAdmin.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/components/patientFeedbacks/PostedPatientFeedbacksAdmin.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/plugins/vuetify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/store/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/src/views/HomePage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backend/psw-front/vue.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/PSW-backendTest.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/UnitTests/AdministratorTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/UnitTests/DoctorTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/UnitTests/MedicalAppointmentTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/UnitTests/PatientFeedbackTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/UnitTests/PatientTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/UnitTests/RecommendationTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PSW-backendTest/UnitTests/UserTests.cs" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Users\Milica\.m2\wrapper\dists\apache-maven-3.6.3-bin\1iopthnavndlasol9gbrbg6bf2\apache-maven-3.6.3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1g5yiLzIMkymxIyHCOdsv9ggTyY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Backend" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="rs.ac.uns.ftn.rabbitmqexample" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.PharmacyApplication">
+    <configuration name="PharmacyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="rabbitmq-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pharmacy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="pharmacy.PharmacyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RabbitmqExampleApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="rabbitmq-example" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="rs.ac.uns.ftn.rabbitmqexample.RabbitmqExampleApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.PharmacyApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8b67da93-2033-40c6-9c5c-3db149a40d3c" name="Default Changelist" comment="" />
+      <created>1597418873223</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597418873223</updated>
+      <workItem from="1597418878240" duration="3390000" />
+      <workItem from="1598977196564" duration="99000" />
+      <workItem from="1599147752480" duration="3750000" />
+      <workItem from="1599467362611" duration="54000" />
+      <workItem from="1599480052380" duration="3534000" />
+      <workItem from="1599985965130" duration="276000" />
+      <workItem from="1603042492009" duration="9000" />
+      <workItem from="1624548660071" duration="1586000" />
+      <workItem from="1624553112864" duration="492000" />
+      <workItem from="1624553623340" duration="890000" />
+      <workItem from="1624554537507" duration="981000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2186" y="32" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1624553235964">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state x="2186" y="32" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624553235964" />
+    <state x="2245" y="43" key="FileChooserDialogImpl" timestamp="1624556345382">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state x="2245" y="43" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556345382" />
+    <state width="1045" height="2" key="GridCell.Tab.0.bottom" timestamp="1624556348082">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348082" />
+    <state width="1045" height="2" key="GridCell.Tab.0.center" timestamp="1624556348082">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348082" />
+    <state width="1045" height="2" key="GridCell.Tab.0.left" timestamp="1624556348082">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348082" />
+    <state width="1045" height="2" key="GridCell.Tab.0.right" timestamp="1624556348082">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348082" />
+    <state width="1045" height="2" key="GridCell.Tab.1.bottom" timestamp="1624556348083">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348083" />
+    <state width="1045" height="2" key="GridCell.Tab.1.center" timestamp="1624556348083">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348083" />
+    <state width="1045" height="2" key="GridCell.Tab.1.left" timestamp="1624556348083">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348083" />
+    <state width="1045" height="2" key="GridCell.Tab.1.right" timestamp="1624556348083">
+      <screen x="1920" y="0" width="1088" height="574" />
+    </state>
+    <state width="1045" height="2" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1088.574@1920.0.1088.574" timestamp="1624556348083" />
+  </component>
+</project>
