@@ -46,32 +46,38 @@ namespace PSW_backend.Repositories
         {
             if (checkDates)
             {
-                patientFoundByUsername.LastCanceledDate = DateTime.Now;
+            //    patientFoundByUsername.LastCanceledDate = DateTime.Now;
                 patientFoundByUsername.CancelledMedicalAppointments = 1;
                 _applicationDbContext.SaveChanges();
             }
             else { 
                 if(patientFoundByUsername.CancelledMedicalAppointments == 2)
                 {
-                    patientFoundByUsername.LastCanceledDate = DateTime.Now;
+               //     patientFoundByUsername.LastCanceledDate = DateTime.Now;
                     patientFoundByUsername.CancelledMedicalAppointments = 3;
                     patientFoundByUsername.IsMalicious = true;
                     _applicationDbContext.SaveChanges();
                 }
                 else
                 {
-                    patientFoundByUsername.LastCanceledDate = DateTime.Now;
+                //    patientFoundByUsername.LastCanceledDate = DateTime.Now;
                     patientFoundByUsername.CancelledMedicalAppointments++;
                     _applicationDbContext.SaveChanges();
                 }
             }
         }
 
-        public void BlockPatient(string username)
+        public Patient BlockPatient(string username)
         {
             Patient patient = GetPatientByUsername(username);
             patient.IsBlocked = true;
             _applicationDbContext.SaveChanges();
+            return patient;
+        }
+
+        public List<Patient> GetMaliciousPatients()
+        {
+            return _applicationDbContext.Patients.Where(patient => patient.IsMalicious.Equals(true)).ToList();
         }
     }
 }

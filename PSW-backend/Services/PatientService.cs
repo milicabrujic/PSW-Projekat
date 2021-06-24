@@ -54,8 +54,8 @@ namespace PSW_backend.Services
             Patient patientFoundByUsername = _patientRepository.GetPatientByUsername(username);
           //  DateTime lastCancelDate = patientFoundByUsername.LastCanceledDate;
           //  DateTime today = DateTime.Now;
-            bool checkDates = CompareDates(patientFoundByUsername.LastCanceledDate, DateTime.Now);
-            _patientRepository.UpdateMaliciousPatient(patientFoundByUsername, checkDates);
+         //   bool checkDates = CompareDates(patientFoundByUsername.LastCanceledDate, DateTime.Now);
+          //  _patientRepository.UpdateMaliciousPatient(patientFoundByUsername, checkDates);
         }
 
         private bool CompareDates(DateTime lastCancelDate, DateTime today)
@@ -67,9 +67,18 @@ namespace PSW_backend.Services
             return true;
         }
 
-        public void BlockPatient(string username)
+        public PatientDto BlockPatient(string username)
         {
-            _patientRepository.BlockPatient(username);
+           return  PatientAdapter.PatientToPatientDto(_patientRepository.BlockPatient(username));
+        }
+
+        public List<PatientDto> GetMaliciousPatients()
+        {
+            List<PatientDto> patientDtos = new List<PatientDto>();
+
+            _patientRepository.GetMaliciousPatients().ForEach(maliciousPatient => patientDtos.Add(PatientAdapter.PatientToPatientDto(maliciousPatient)));
+
+            return patientDtos;
         }
     }
 }

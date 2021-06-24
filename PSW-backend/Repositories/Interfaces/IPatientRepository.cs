@@ -14,6 +14,7 @@ namespace PSW_backend.Repositories.Interfaces
         List<Patient> GetAll();
         void SavePatient(Patient patient);
         void UpdateMaliciousPatient(Patient patientFoundByUsername, bool checkDates);
-        void BlockPatient(string username);
+        Patient BlockPatient(string username);
+        List<Patient> GetMaliciousPatients();
     }
 }

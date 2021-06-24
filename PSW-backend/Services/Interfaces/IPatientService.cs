@@ -1,4 +1,5 @@
 ﻿using PSW_backend.Dtos;
+using PSW_backend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace PSW_backend.Services.Interfaces
         bool CheckIfPatientExists(string username, string email);
         void RegisterPatient(PatientDto patientDto);
         void CheckMaliciousPatient(string username);
-        void BlockPatient(string username);
+        PatientDto BlockPatient(string username);
+        List<PatientDto> GetMaliciousPatients();
     }
 }

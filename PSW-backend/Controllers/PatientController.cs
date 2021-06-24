@@ -33,17 +33,23 @@ namespace PSW_backend.Controllers
             _patientService.RegisterPatient(patientDto);
             return Ok(patientDto);
         }
-        [HttpGet("/malicious/{username?}")]
+        [HttpGet("malicious/{username?}")]
         public IActionResult MaliciousPatient(string username)
         {
             _patientService.CheckMaliciousPatient(username);
             return Ok();
         }
-        [HttpGet("/block/{username?}")]
+        [HttpPut("block/{username?}")]
         public IActionResult BlockPatient(string username)
         {
             _patientService.BlockPatient(username);
             return Ok();
+        }
+        [HttpGet("maliciousPatients")]
+        public IActionResult GetMaliciousPatients()
+        {
+            List<PatientDto> patientDtos = _patientService.GetMaliciousPatients();
+            return Ok(patientDtos);
         }
     }
 }

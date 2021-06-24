@@ -26,7 +26,7 @@ namespace PSW_backend.Adapters
             patient.IsMalicious = dto.IsMalicious;
             patient.CancelledMedicalAppointments = dto.CancelledMedicalAppointments;
             patient.GeneralDoctorId = dto.GeneralDoctorId;
-            patient.LastCanceledDate = new DateTime(2000, 1, 1, 0, 0, 0);
+        //    patient.LastCanceledDate = new DateTime(2000, 1, 1, 0, 0, 0);
             return patient;
         }
 

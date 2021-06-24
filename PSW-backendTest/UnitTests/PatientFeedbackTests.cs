@@ -275,20 +275,20 @@ namespace PSW_backendTest.UnitTests
             _patientFeedbacks = CreatePatientFeedbacks();
             _patientFeedbackDTOs = CreatePatientFeedbackDTOs();
             _stubPatientFeedbackRepository.Setup(x => x.GetAll()).Returns(_patientFeedbacks);
-            _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
+         //   _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
             _patientFeedbackController = new PatientFeedbackController(_patientFeedbackService);
         }
 
         private void ArrangeForCheckingIfPatientFeedbackExistsTests(PatientFeedbackDto patientFeedbackDto)
         {
             _stubPatientFeedbackRepository.Setup(x => x.GetPatientFeedbackById(patientFeedbackDto.Id)).Returns(CreatePatientFeedbacks().Find(patientFeedback => patientFeedback.Id == patientFeedbackDto.Id));
-            _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
+          //  _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
         }
        
         private void ArrangeForCheckingIfStatusChangedSuccessfullyTests(PatientFeedback patientFeedback)
         {
             _stubPatientFeedbackRepository.Setup(x => x.SaveChangedPatientFeedback(It.IsAny<PatientFeedback>()));
-            _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
+          //  _patientFeedbackService = new PatientFeedbackService(_stubPatientFeedbackRepository.Object);
         }
 
         #endregion HelperFunctions

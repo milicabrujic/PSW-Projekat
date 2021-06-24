@@ -138,6 +138,7 @@ export default {
           this.createRecommendation = false;
           this.startAppointment = false;
           this.closeAppointment = false;
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
