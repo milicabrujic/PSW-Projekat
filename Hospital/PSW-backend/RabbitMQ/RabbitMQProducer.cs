@@ -11,7 +11,7 @@ namespace PSW_backend.RabbitMQ
 {
     public class RabbitMQProducer
     {
-        public static void Send()
+        public static void Send(PrescriptionDto prescriptionDto)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
@@ -23,11 +23,7 @@ namespace PSW_backend.RabbitMQ
                                      autoDelete: false,
                                      arguments: null);
 
-                LoginDto message = new LoginDto
-                {
-                    Username = "username",
-                    Password = "password"
-                };
+                PrescriptionDto message = prescriptionDto;
 
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 

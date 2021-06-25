@@ -4,9 +4,9 @@
       <h2>History of appointments</h2>
       <v-row>
         <v-col v-for="h in history" :key="h.id" md="4">
-          <v-card class="mx-auto" max-width="344">
+          <v-card class="mx-auto detailsBorderColor mt-8" max-width="344">
             <v-card-text>
-              <div>Medicinski pregled</div>
+              <div>Medical appointment</div>
               <p class="display-1 text--primary">
                 {{ $store.state.user.username }}
               </p>
@@ -34,7 +34,7 @@
               class="text--primary"
             >
               <h3 style="text-align: center">
-                Can't cancelled appointment, there is no enough time
+                Can't cancel appointment, there is no enough time
               </h3>
             </div>
             <div v-if="h.status === 1 || h.status === 2" class="text--primary">
@@ -93,5 +93,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.cardBorderColor {
+  border-left: 1px solid #26a69a;
+  border-top: 1px solid #26a69a;
+  border-right: 1px solid #26a69a;
+  border-bottom: 1px solid #26a69a;
+}
+.detailsBorderColor {
+  border-left: 2px solid #26a69a;
+  border-top: 2px solid #26a69a;
+  border-right: 2px solid #26a69a;
+  border-bottom: 2px solid #26a69a;
+}
 </style>

@@ -4,18 +4,19 @@
       <h2>Appointments for doctor</h2>
       <v-row v-if="startAppointment == false">
         <v-col v-for="h in history" :key="h.id" md="4">
-          <v-card class="mx-auto" max-width="344">
+          <v-card class="mx-auto detailsBorderColor mt-8" max-width="344">
             <v-card-text>
-              <div>Medicinski pregled</div>
+              <div>Medical Appointment</div>
               <p class="display-1 text--primary">{{ h.patientId }}</p>
               <p>{{ h.date }}</p>
               <div class="text--primary">
-                lekar<br />
+                Doctor<br />
                 <h3>{{ h.doctorId }}</h3>
               </div>
             </v-card-text>
 
             <v-card-actions>
+              <v-spacer></v-spacer>
               <v-btn color="primary" @click="start(h.id)">
                 Start appointment
               </v-btn>
@@ -23,7 +24,10 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-card v-if="createRecommendation == true" class="detailsBorderColor">
+      <v-card
+        v-if="createRecommendation == true"
+        class="detailsBorderColor mt-8"
+      >
         <v-card-title>
           <span class="primary--text font-italic headline" primary-title
             >Add doctor for recommendation</span
@@ -34,6 +38,7 @@
             <v-form ref="form">
               <v-select
                 v-model="recommendation.SpecialistDoctorId"
+                outlined
                 label="Choose specialist*"
                 color="primary"
                 :items="specialists"
@@ -45,15 +50,16 @@
           </v-container>
         </v-card-text>
         <v-card-actions class="pr-10 pb-10">
-          <v-btn color="primary" @click="end()">End Appointment</v-btn>
           <v-btn color="primary" @click="startRecommendation()"
             >Create recommendation</v-btn
           >
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="end()">End Appointment</v-btn>
         </v-card-actions>
       </v-card>
       <v-card
         v-if="startAppointment == true && closeAppointment == false"
-        class="detailsBorderColor"
+        class="detailsBorderColor mt-8"
       >
         <v-card-title>
           <span class="primary--text font-italic headline" primary-title
@@ -82,12 +88,57 @@
           </v-container>
         </v-card-text>
         <v-card-actions class="pr-10 pb-10">
-          <v-btn color="primary" @click="end()">End Appointment</v-btn>
           <v-btn color="primary" @click="clickRecommendation()"
             >Choose Specialists</v-btn
           >
+          <v-btn color="primary" @click="clickPrescription()"
+            >Create Prescription</v-btn
+          >
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="end()">End Appointment</v-btn>
         </v-card-actions>
       </v-card>
+
+      <!-- Prescriptions -->
+      <v-card v-if="createPrescription == true" class="detailsBorderColor">
+        <v-card-title>
+          <span class="primary--text font-italic headline" primary-title
+            >Create prescription</span
+          >
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-form ref="form">
+              <v-text-field
+                v-model="prescription.Text"
+                class="mt-n2"
+                label="text*"
+                color="primary"
+                required
+              ></v-text-field>
+              <v-select
+                v-model="prescription.DrugNames"
+                label="Choose drugs*"
+                color="primary"
+                :items="drugs"
+                multiple
+                clearable
+                outlined
+                class="pt-4 mb-n8"
+                required
+              >
+              </v-select>
+            </v-form>
+          </v-container>
+        </v-card-text>
+        <v-card-actions class="pr-10 pb-10">
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="savePrescription()"
+            >SAVE PRESCRIPTION</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+      <!-- EndPrescriptions -->
     </v-container>
   </div>
 </template>
@@ -100,6 +151,7 @@ export default {
     startAppointment: false,
     closeAppointment: false,
     createRecommendation: false,
+    createPrescription: false,
     appointment: {
       Id: null,
       PatientId: null,
@@ -111,6 +163,13 @@ export default {
       PatientId: null,
       SpecialistDoctorId: null,
     },
+    prescription: {
+      Text: "",
+      PatientId: null,
+      DoctorId: null,
+      DrugNames: [],
+    },
+    drugs: ["aspirin", "brufen"],
   }),
   computed: {},
   methods: {
@@ -147,6 +206,9 @@ export default {
       this.createRecommendation = true;
       this.closeAppointment = true;
     },
+    clickPrescription() {
+      this.createPrescription = true;
+    },
     startRecommendation() {
       this.recommendation.PatientId = this.appointment.PatientId;
       axios
@@ -155,6 +217,22 @@ export default {
           console.log(recommendation.data);
           this.closeAppointment = false;
           this.createRecommendation = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    savePrescription() {
+      this.prescription.PatientId = this.appointment.PatientId;
+      this.prescription.DoctorId = this.$store.state.user.id;
+
+      axios
+        .post("/api/prescription/", this.prescription)
+        .then((prescription) => {
+          console.log(prescription.data);
+          this.createPrescription = false;
+          this.prescription.Text = "";
+          this.prescription.DrugNames = [];
         })
         .catch((error) => {
           console.log(error);
@@ -189,5 +267,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.cardBorderColor {
+  border-left: 1px solid #26a69a;
+  border-top: 1px solid #26a69a;
+  border-right: 1px solid #26a69a;
+  border-bottom: 1px solid #26a69a;
+}
+.detailsBorderColor {
+  border-left: 2px solid #26a69a;
+  border-top: 2px solid #26a69a;
+  border-right: 2px solid #26a69a;
+  border-bottom: 2px solid #26a69a;
+}
 </style>
