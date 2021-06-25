@@ -11,6 +11,6 @@ namespace PSW_backend.Repositories.Interfaces
         Doctor  GetGeneralDoctorByPatientUsername(string username);
         Doctor FindById(int doctorId);
         List<Doctor> DoctorSpecialists();
-        public List<Doctor> GetGeneralDoctors();
+        List<Doctor> GetGeneralDoctors();
     }
 }
