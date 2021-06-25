@@ -53,6 +53,8 @@ namespace PSW_backend
             services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackRepository>();
             services.AddScoped<IRecommendationRepository, RecommendationRepository>();
+            services.AddScoped<IDrugRepository, DrugRepository>();
+            services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
             //IServices
             services.AddScoped<IUserService, UserService>();
@@ -62,6 +64,8 @@ namespace PSW_backend
             services.AddScoped<IMedicalAppointmentService, MedicalAppointmentService>();
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
             services.AddScoped<IRecommendationService, RecommendationService>();
+            services.AddScoped<IDrugService, DrugService>();
+            services.AddScoped<IPrescriptionService, PrescriptionService>();
 
             //cors for frontend
             services.AddCors(options =>

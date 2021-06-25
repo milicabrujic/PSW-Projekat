@@ -40,7 +40,6 @@ namespace PSW_backend.Services
             patient.AuthenticationToken = GenerateAuthenticationToken();
 
             _patientRepository.SavePatient(patient);
-            RabbitMQProducer.Send();
         }
 
         public String GenerateAuthenticationToken()

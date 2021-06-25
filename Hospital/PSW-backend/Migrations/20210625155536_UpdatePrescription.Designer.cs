@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PSW_backend.Models;
@@ -9,30 +10,16 @@ using PSW_backend.Models;
 namespace PSW_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210625155536_UpdatePrescription")]
+    partial class UpdatePrescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityByDefaultColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.5");
-
-            modelBuilder.Entity("DrugPrescription", b =>
-                {
-                    b.Property<int>("DrugsId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PrescriptionsId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("DrugsId", "PrescriptionsId");
-
-                    b.HasIndex("PrescriptionsId");
-
-                    b.ToTable("DrugPrescription");
-                });
 
             modelBuilder.Entity("PSW_backend.Models.Drug", b =>
                 {
@@ -47,7 +34,12 @@ namespace PSW_backend.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PrescriptionId");
 
                     b.ToTable("Drug");
                 });
@@ -241,19 +233,15 @@ namespace PSW_backend.Migrations
                     b.ToTable("Patient");
                 });
 
-            modelBuilder.Entity("DrugPrescription", b =>
+            modelBuilder.Entity("PSW_backend.Models.Drug", b =>
                 {
-                    b.HasOne("PSW_backend.Models.Drug", null)
-                        .WithMany()
-                        .HasForeignKey("DrugsId")
+                    b.HasOne("PSW_backend.Models.Prescription", "Prescription")
+                        .WithMany("Drugs")
+                        .HasForeignKey("PrescriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PSW_backend.Models.Prescription", null)
-                        .WithMany()
-                        .HasForeignKey("PrescriptionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Prescription");
                 });
 
             modelBuilder.Entity("PSW_backend.Models.MedicalAppointment", b =>
@@ -357,6 +345,11 @@ namespace PSW_backend.Migrations
                         .IsRequired();
 
                     b.Navigation("GeneralDoctor");
+                });
+
+            modelBuilder.Entity("PSW_backend.Models.Prescription", b =>
+                {
+                    b.Navigation("Drugs");
                 });
 
             modelBuilder.Entity("PSW_backend.Models.Doctor", b =>
