@@ -121,6 +121,7 @@
                 label="Choose drugs*"
                 color="primary"
                 :items="drugs"
+                item-text="name"
                 multiple
                 clearable
                 outlined
@@ -169,7 +170,7 @@ export default {
       DoctorId: null,
       DrugNames: [],
     },
-    drugs: ["aspirin", "brufen"],
+    drugs: [],
   }),
   computed: {},
   methods: {
@@ -238,6 +239,17 @@ export default {
           console.log(error);
         });
     },
+    getDrugs() {
+      axios
+        .get("/api/drug")
+        .then((drugs) => {
+          this.drugs = drugs.data;
+          console.log(this.drugs);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   mounted() {
     //  this.$store.state.user.username = 2;
@@ -263,6 +275,8 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+
+    this.getDrugs();
   },
 };
 </script>

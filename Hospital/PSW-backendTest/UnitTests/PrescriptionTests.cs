@@ -18,6 +18,7 @@ namespace PSW_backendTest.UnitTests
     {
         #region Variables
         private readonly Mock<IPrescriptionRepository> _stubPrescriptionRepository;
+        private readonly Mock<IDrugRepository> _stubDrugRepository;
         private PrescriptionService _prescriptionService;
         private PrescriptionController _prescriptionController;
         private List<Prescription> _prescriptions;
@@ -27,6 +28,7 @@ namespace PSW_backendTest.UnitTests
         public PrescriptionTests()
         {
             _stubPrescriptionRepository = new Mock<IPrescriptionRepository>();
+            _stubDrugRepository = new Mock<IDrugRepository>();
 
             _prescriptions = new List<Prescription>();
             _prescriptionDTOs = new List<PrescriptionDto>();
@@ -67,8 +69,7 @@ namespace PSW_backendTest.UnitTests
         public void Checks_if_prescription_is_created()
         {
             //Arange
-            _stubPrescriptionRepository.Setup(x => x.SaveNewPrescription(CreatePrescription()));
-            _prescriptionService = new PrescriptionService(_stubPrescriptionRepository.Object);
+            ArrangeForGetDrugs();
 
             //Act
             PrescriptionDto prescriptionDTO = _prescriptionService.SaveNewPrescription(CreatePrescriptionDto());
@@ -83,15 +84,29 @@ namespace PSW_backendTest.UnitTests
         {
             //Arange
             PrescriptionDto prescriptionDto = CreatePrescriptionDto();
-            _stubPrescriptionRepository.Setup(x => x.SaveNewPrescription(CreatePrescription()));
-            _prescriptionService = new PrescriptionService(_stubPrescriptionRepository.Object);
-            _prescriptionController = new PrescriptionController(_prescriptionService);
+            ArrangeForGetDrugs();
 
             //Act
             var actionResult = _prescriptionController.SaveNewPrescription(prescriptionDto);
 
             //Assert
             ((actionResult as OkObjectResult).Value as PrescriptionDto).ShouldBeEquivalentTo(prescriptionDto);
+        }
+
+        [Fact]
+        public void Checks_if_drugs_are_added_to_prescription()
+        {
+            //Arange
+            PrescriptionDto prescriptionDto = CreatePrescriptionDto();
+            Prescription prescription = CreatePrescription();
+            ArrangeForGetDrugs();
+
+            //Act
+            _prescriptionService.AddDrugsToPerscription(prescriptionDto, prescription);
+
+            //Assert
+            prescription.Drugs.Count.ShouldBeEquivalentTo(1);
+
         }
         #endregion CreatePrescription
 
@@ -131,7 +146,8 @@ namespace PSW_backendTest.UnitTests
                 Id = 1,
                 Text = "Migrenes prescription.",
                 PatientId = 1,
-                DoctorId = 1
+                DoctorId = 1,
+                DrugNames = new List<String> { "Aspirin" }
             };
         }
 
@@ -142,8 +158,25 @@ namespace PSW_backendTest.UnitTests
                 Id = 1,
                 Text = "Migrenes prescription.",
                 PatientId = 1,
-                DoctorId = 1
+                DoctorId = 1,
+                Drugs = new List<Drug>()
             };
+        }
+        private Drug CreateDrug()
+        {
+            return new Drug
+            {
+                Id = 1,
+                Name = "Aspirin",
+                Amount = 5
+            };
+        }
+        private void ArrangeForGetDrugs()
+        {
+            _stubPrescriptionRepository.Setup(x => x.SaveNewPrescription(CreatePrescription()));
+            _stubDrugRepository.Setup(x => x.GetDrugByName("Aspirin")).Returns(CreateDrug());
+            _prescriptionService = new PrescriptionService(_stubPrescriptionRepository.Object, _stubDrugRepository.Object);
+            _prescriptionController = new PrescriptionController(_prescriptionService);
         }
         #endregion HelperFunctions
     }

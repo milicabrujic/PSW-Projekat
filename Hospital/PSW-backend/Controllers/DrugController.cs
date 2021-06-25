@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PSW_backend.Dtos;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,13 @@ namespace PSW_backend.Controllers
         public DrugController(IDrugService drugService)
         {
             _drugService = drugService;
+        }
+
+        [HttpGet()]
+        public IActionResult GetDrugs()
+        {
+            List<DrugDto> drugs = _drugService.GetDrugs();
+            return Ok(drugs);
         }
     }
 }

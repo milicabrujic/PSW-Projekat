@@ -15,5 +15,14 @@ namespace PSW_backend.Repositories
         {
             _applicationDbContext = applicationDbContext;
         }
+
+        public List<Drug> GetDrugs()
+        {
+            return _applicationDbContext.Drugs.ToList();
+        }
+        public Drug GetDrugByName(string name)
+        {
+            return _applicationDbContext.Drugs.FirstOrDefault(drug => drug.Name.Equals(name));
+        }
     }
 }
