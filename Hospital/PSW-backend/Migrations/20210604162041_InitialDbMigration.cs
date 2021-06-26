@@ -48,6 +48,8 @@ namespace PSW_backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+          
+
             migrationBuilder.CreateTable(
                 name: "Doctor",
                 columns: table => new
@@ -65,6 +67,13 @@ namespace PSW_backend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.AddColumn<int>(
+              name: "Type",
+              table: "Doctor",
+              type: "integer",
+              nullable: false,
+              defaultValue: 0);
 
             migrationBuilder.CreateTable(
                 name: "Patient",

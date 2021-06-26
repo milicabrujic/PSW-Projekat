@@ -27,9 +27,9 @@ namespace PSW_backend.Repositories
             return foundedAppointment;
         }
 
-        public MedicalAppointment EndMedicalAppointment(MedicalAppointment medicalAppointment)
+        public MedicalAppointment EndMedicalAppointment(int id)
         {
-            MedicalAppointment foundedAppointment = _applicationDbContext.MedicalAppointments.Find(medicalAppointment.Id);
+            MedicalAppointment foundedAppointment = _applicationDbContext.MedicalAppointments.Find(id);
             foundedAppointment.Status = MedicalAppointmentStatus.Done;
             _applicationDbContext.SaveChanges();
             return foundedAppointment;
@@ -50,10 +50,11 @@ namespace PSW_backend.Repositories
             return _applicationDbContext.MedicalAppointments.Where(appointment => appointment.PatientId.Equals(id)).ToList();
         }
 
-        public void SaveMedicalAppointment(MedicalAppointment medicalAppointment)
+        public MedicalAppointment SaveMedicalAppointment(MedicalAppointment medicalAppointment)
         {
             _applicationDbContext.MedicalAppointments.Add(medicalAppointment);
             _applicationDbContext.SaveChanges();
+            return medicalAppointment;
         }
     }
 }

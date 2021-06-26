@@ -49,7 +49,7 @@ namespace PSW_backend.Controllers
         [HttpPost("end")]
         public IActionResult EndMedicalAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto)
         {
-            MedicalAppointment appointment = _medicalAppointmentService.EndMedicalAppointment(medicalAppointmentDto);
+            MedicalAppointmentDto appointment = _medicalAppointmentService.EndMedicalAppointment(medicalAppointmentDto.Id);
             return Ok(appointment);
         }
         [HttpPost("cancelAppointment/{id?}")]
@@ -57,12 +57,6 @@ namespace PSW_backend.Controllers
         {
             MedicalAppointmentDto appointmentDto = _medicalAppointmentService.CancelMedicalAppointment(id);
             return Ok(appointmentDto);
-        }
-        [HttpGet("proba")]
-        public IActionResult proba()
-        {
-            Console.WriteLine("hello from porba");
-            return Ok();
         }
     }
 }

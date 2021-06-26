@@ -20,15 +20,14 @@ namespace PSW_backend.Services
             this._medicalAppointmentRepository = medicalAppointmentRepository;
             this._doctorRepository = doctorRepository;
         }
-        public void SaveAppointment(MedicalAppointmentDto medicalAppointmentDto)
+        public MedicalAppointmentDto SaveAppointment(MedicalAppointmentDto medicalAppointmentDto)
         {
             MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
-            _medicalAppointmentRepository.SaveMedicalAppointment(medicalAppointment);
+           return MedicalAppointmentAdapter.MedicalAppointmentToMedicalAppointmentDto(_medicalAppointmentRepository.SaveMedicalAppointment(medicalAppointment));
         }
-        public MedicalAppointment EndMedicalAppointment(MedicalAppointmentDto medicalAppointmentDto)
+        public MedicalAppointmentDto EndMedicalAppointment(int id)
         {
-            MedicalAppointment medicalAppointment = MedicalAppointmentAdapter.MedicalAppointmentDtoToMedicalsAppointment(medicalAppointmentDto);
-            return _medicalAppointmentRepository.EndMedicalAppointment(medicalAppointment); ;
+            return MedicalAppointmentAdapter.MedicalAppointmentToMedicalAppointmentDto(_medicalAppointmentRepository.EndMedicalAppointment(id));
         }
         public MedicalAppointmentDto CancelMedicalAppointment(int id)
         {           
