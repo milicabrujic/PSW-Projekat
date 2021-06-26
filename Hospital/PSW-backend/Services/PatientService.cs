@@ -52,5 +52,71 @@ namespace PSW_backend.Services
 
             return authenticationToken;
         }
+
+        public bool CompareDates(DateTime lastCancelDate, DateTime today)
+        {
+            //if you want to check change AddMonths to AddMinutes
+            int compareDates = DateTime.Compare(lastCancelDate.AddMonths(1), today);
+            if (compareDates > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public PatientDto BlockPatient(string username)
+        {
+            _patientRepository.BlockPatient(username);
+            return PatientAdapter.PatientToPatientDto(_patientRepository.BlockPatient(username));
+        }
+
+        public List<PatientDto> GetMaliciousPatients()
+        {
+            List<PatientDto> patientDtos = new List<PatientDto>();
+
+            _patientRepository.GetMaliciousPatients().ForEach(maliciousPatient => patientDtos.Add(PatientAdapter.PatientToPatientDto(maliciousPatient)));
+
+            return patientDtos;
+        }
+
+        public void CheckMaliciousPatient(string username)
+        {
+            Patient patientFoundByUsername = _patientRepository.GetPatientByUsername(username);
+            
+            DateTime lastCancelDate = patientFoundByUsername.LastCanceledDate;
+            DateTime today = DateTime.Now;
+           
+            bool checkDates = CompareDates(patientFoundByUsername.LastCanceledDate, DateTime.Now);
+
+            UpdateMalitiousPatient(checkDates, patientFoundByUsername);
+            
+            _patientRepository.UpdateMaliciousPatient();
+        }
+
+        public Patient UpdateMalitiousPatient(bool checkDates, Patient patientFoundByUsername)
+        {
+            if (checkDates)
+            {
+                patientFoundByUsername.LastCanceledDate = DateTime.Now;
+                patientFoundByUsername.CancelledMedicalAppointments = 1;
+            }
+            else
+            {
+                if (patientFoundByUsername.CancelledMedicalAppointments == 2)
+                {
+                    patientFoundByUsername.LastCanceledDate = DateTime.Now;
+                    patientFoundByUsername.CancelledMedicalAppointments = 3;
+                    patientFoundByUsername.IsMalicious = true;
+                }
+                else
+                {
+                    patientFoundByUsername.LastCanceledDate = DateTime.Now;
+                    patientFoundByUsername.CancelledMedicalAppointments++;
+                }
+            }
+
+            return patientFoundByUsername;
+        }
     }
 }
+

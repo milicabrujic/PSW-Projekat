@@ -13,5 +13,8 @@ namespace PSW_backend.Repositories.Interfaces
         Patient GetPatientById(int id);
         List<Patient> GetAll();
         void SavePatient(Patient patient);
+        void UpdateMaliciousPatient();
+        Patient BlockPatient(string username);
+        List<Patient> GetMaliciousPatients();
     }
 }

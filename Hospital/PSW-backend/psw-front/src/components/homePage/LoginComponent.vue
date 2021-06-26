@@ -89,7 +89,12 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            this.$emit("notLoggedIn");
+            console.log(error.response.data.status);
+            if (error.response.data.status === 403) {
+              this.$emit("userBlocked");
+            } else {
+              this.$emit("notLoggedIn");
+            }
           });
       } else {
         console.log("not valid");

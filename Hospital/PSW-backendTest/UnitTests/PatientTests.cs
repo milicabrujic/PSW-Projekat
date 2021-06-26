@@ -124,6 +124,68 @@ namespace PSW_backendTest.UnitTests
             ((actionResult as OkObjectResult).Value as PatientDto).ShouldBeEquivalentTo(patientDto);
         }
         #endregion PatientRegistrationTests
+        
+        #region PatientBlockingTests
+        [Fact]
+        public void Gets_all_malicious_patient_service()
+        {
+            //Arange
+            ArrangeForGetMaliciousPatients();
+
+            //Act
+            List<PatientDto> patient = _patientService.GetMaliciousPatients();
+
+            //Assert
+            patient.ShouldNotBeNull();
+            patient.ShouldNotBeEmpty();
+            patient.Count.ShouldBeEquivalentTo(2);
+        }
+        [Fact]
+        public void Checks_if_patient_is_block()
+        {
+            //Arange
+            PatientDto patientMalicious = CreatePatientDto();
+            Patient patientTemp = CreatePatient();
+
+            _stubPatientRepository.Setup(x => x.BlockPatient(patientMalicious.Username)).Returns(CreateMaliciousPatients().Find(patient => patient.Username == patientMalicious.Username));
+            _patientService = new PatientService(_stubPatientRepository.Object);
+
+            //Act
+            PatientDto patient = _patientService.BlockPatient(patientMalicious.Username);
+            Console.WriteLine(patient.IsBlocked);
+            //Assert
+            patientTemp.IsBlocked.ShouldNotBe(patient.IsBlocked);
+        }
+
+        //[Fact]
+        //public void Compares_dates_over_one_month()
+        //{
+        //    //Arange
+        //    DateTime today = DateTime.Now;
+        //    DateTime overOneMonthAgo = new DateTime(2020, 1, 1, 0, 0, 0);
+
+        //    //Act
+        //    bool overOneMonth = _patientService.CompareDates(overOneMonthAgo, today);
+
+        //    //Assert
+        //    overOneMonth.ShouldBeTrue();
+        //}
+
+        //[Fact]
+        //public void Compares_dates_under_one_month()
+        //{
+        //    //Arange
+        //    ArrangeForGetMaliciousPatients();
+
+        //    //Act
+        //    List<PatientDto> patient = _patientService.GetMaliciousPatients();
+
+        //    //Assert
+        //    patient.ShouldNotBeNull();
+        //    patient.ShouldNotBeEmpty();
+        //    patient.Count.ShouldBeEquivalentTo(2);
+        //}
+        #endregion PatientBlockingTests
 
         #region HelperFunctions
         private PatientDto CreatePatientDto()
@@ -203,12 +265,96 @@ namespace PSW_backendTest.UnitTests
 
             return _patients;
         }
+        private List<PatientDto> CreateMaliciousPatientsDto()
+        {
+            _patientDtos.Add(new PatientDto
+            {
+                Id = 1,
+                Name = "Milica",
+                Surname = "Brujic",
+                Username = "mb",
+                Email = "mb@gmail.com",
+                Password = "123",
+                Address = "Laze Teleckog 1",
+                PhoneNumber = "060000000",
+                // Role = Roles.Patient,
+                IsBlocked = true,
+                IsMalicious = true,
+                CancelledMedicalAppointments = 2,
+                GeneralDoctorId = 1
+            });
 
+            _patientDtos.Add(new PatientDto
+            {
+                Id = 2,
+                Name = "Ivan",
+                Surname = "Ivanovic",
+                Username = "ii",
+                Email = "ii@gmail.com",
+                Password = "123",
+                Address = "Laze Teleckog 1",
+                PhoneNumber = "060000000",
+                // Role = Roles.Patient,
+                IsBlocked = false,
+                IsMalicious = true,
+                CancelledMedicalAppointments = 1,
+                GeneralDoctorId = 1
+            });
+
+            return _patientDtos;
+        }
+        private List<Patient> CreateMaliciousPatients()
+        {
+            _patients.Add(new Patient
+            {
+                Id = 1,
+                Name = "Milica",
+                Surname = "Brujic",
+                Username = "mb",
+                Email = "mb@gmail.com",
+                Password = "123",
+                Address = "Laze Teleckog 1",
+                PhoneNumber = "060000000",
+                Role = Roles.Patient,
+                IsBlocked = true,
+                IsMalicious = true,
+                CancelledMedicalAppointments = 2,
+                GeneralDoctorId = 1
+            });
+
+            _patients.Add(new Patient
+            {
+                Id = 2,
+                Name = "Ivan",
+                Surname = "Ivanovic",
+                Username = "ii",
+                Email = "ii@gmail.com",
+                Password = "123",
+                Address = "Laze Teleckog 1",
+                PhoneNumber = "060000000",
+                Role = Roles.Patient,
+                IsBlocked = false,
+                IsMalicious = true,
+                CancelledMedicalAppointments = 1,
+                GeneralDoctorId = 1
+            });
+
+            return _patients;
+        }
         private void ArrangeForCheckingIfUserExistsTests(string username, string email)
         {
             _stubPatientRepository.Setup(x => x.GetPatientByUsername(username)).Returns(CreatePatients().Find(patient => patient.Username == username));
             _stubPatientRepository.Setup(x => x.GetPatientByEmail(email)).Returns(CreatePatients().Find(patient => patient.Email == email));
             _patientService = new PatientService(_stubPatientRepository.Object);
+        }
+
+        private void ArrangeForGetMaliciousPatients()
+        {
+            _patients = CreateMaliciousPatients();
+            _patientDtos = CreateMaliciousPatientsDto();
+            _stubPatientRepository.Setup(x => x.GetMaliciousPatients()).Returns(_patients);
+            _patientService = new PatientService(_stubPatientRepository.Object);
+            _patientController = new PatientController(_patientService);
         }
         #endregion HelperFunctions
     }
