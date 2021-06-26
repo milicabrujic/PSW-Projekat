@@ -269,8 +269,9 @@ namespace PSW_backendTest.UnitTests
             medicalAppointmentDtoForCheck.Date.ShouldNotBe(foundedAppointment.Date);
 
         }
+   
         [Fact]
-        public void Get_active_doctor_appointments()
+        public void Get_active_doctor_appointments_controller()
         {
             MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
             //Arange
@@ -286,7 +287,7 @@ namespace PSW_backendTest.UnitTests
 
         }
         [Fact]
-        public void Cancel_medical_appointment_appointments()
+        public void Cancel_medical_appointment_controller()
         {
             MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
 
@@ -300,6 +301,84 @@ namespace PSW_backendTest.UnitTests
 
             //Assert
             ((actionResult as OkObjectResult).Value as MedicalAppointmentDto).ShouldBeEquivalentTo(dto);
+
+        }
+        [Fact]
+        public void End_medical_appointment_controller()
+        {
+            MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
+            MedicalAppointment appointment = CreateMedicalAppointment();
+
+            //Arange
+            _stubMedicalAppointmentRepository.Setup(x => x.EndMedicalAppointment(dto.Id)).Returns(CreateAppintments().Find(appointment => appointment.Id.Equals(dto.Id)));
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+            _medicalAppointmentController = new MedicalAppointmentController(_medicalAppointmentService);
+
+            //Act
+            var actionResult = _medicalAppointmentController.EndMedicalAppointment(dto);
+
+            //Assert
+            ((actionResult as OkObjectResult).Value as MedicalAppointmentDto).ShouldBeEquivalentTo(dto);
+
+        }
+        [Fact]
+        public void End_medical_appointment_service()
+        {
+            MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
+            //Arange
+            _stubMedicalAppointmentRepository.Setup(x => x.EndMedicalAppointment(dto.Id)).Returns(CreateAppintments().Find(appointment => appointment.Id.Equals(dto.Id)));
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+
+            //Act
+            MedicalAppointmentDto appointmentDto = _medicalAppointmentService.EndMedicalAppointment(dto.Id);
+
+            //Assert
+           appointmentDto.Id.ShouldBeEquivalentTo(1);
+
+        }
+        [Fact]
+        public void Cancel_medical_appointment_service()
+        {
+            MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
+            //Arange
+            _stubMedicalAppointmentRepository.Setup(x => x.CancelMedicalAppointment(dto.Id)).Returns(CreateAppintments().Find(appointment => appointment.Id.Equals(dto.Id)));
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+
+            //Act
+            MedicalAppointmentDto appointmentDto = _medicalAppointmentService.CancelMedicalAppointment(dto.Id);
+
+            //Assert
+            appointmentDto.Id.ShouldBeEquivalentTo(1);
+
+        }
+        [Fact]
+        public void Get_doctor_active_appointments()
+        {
+            MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
+            //Arange
+            _stubMedicalAppointmentRepository.Setup(x => x.GetDoctorAppointments(dto.DoctorId)).Returns(CreateAppintments().Where(appointment => appointment.Status == MedicalAppointmentStatus.Active).ToList);
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+
+            //Act
+            List<MedicalAppointment> medicalAppointments = _medicalAppointmentService.GetDoctorActiveAppointments(dto.DoctorId);
+
+            //Assert
+            medicalAppointments.Count.ShouldBeEquivalentTo(5);
+
+        }
+        [Fact]
+        public void Get_patient_appointments()
+        {
+            MedicalAppointmentDto dto = CreateMedicalAppointmentDto();
+            //Arange
+            _stubMedicalAppointmentRepository.Setup(x => x.GetPatientMedicalAppointments(dto.PatientId)).Returns(CreateAppintments().Where(appointment => appointment.PatientId == dto.PatientId).ToList);
+            _medicalAppointmentService = new MedicalAppointmentService(_stubMedicalAppointmentRepository.Object, _stubDoctorRepository.Object);
+
+            //Act
+            List<MedicalAppointmentHistoryDto> medicalAppointments = _medicalAppointmentService.GetPatientAppointments(dto.PatientId);
+
+            //Assert
+            medicalAppointments.Count.ShouldBeEquivalentTo(5);
 
         }
         #endregion  MedicalAppointmentTests

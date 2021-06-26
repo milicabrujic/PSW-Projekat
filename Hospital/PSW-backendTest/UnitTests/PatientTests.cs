@@ -157,34 +157,58 @@ namespace PSW_backendTest.UnitTests
             patientTemp.IsBlocked.ShouldNotBe(patient.IsBlocked);
         }
 
-        //[Fact]
-        //public void Compares_dates_over_one_month()
-        //{
-        //    //Arange
-        //    DateTime today = DateTime.Now;
-        //    DateTime overOneMonthAgo = new DateTime(2020, 1, 1, 0, 0, 0);
+        [Fact]
+        public void Compares_dates_over_one_month()
+        {
+            //Arange
+            DateTime today = DateTime.Now;
+            DateTime overOneMonthAgo = new DateTime(2020, 1, 1, 0, 0, 0);
+            _patientService = new PatientService(_stubPatientRepository.Object);
+            //Act
+            bool overOneMonth = _patientService.CompareDates(overOneMonthAgo, today);
 
-        //    //Act
-        //    bool overOneMonth = _patientService.CompareDates(overOneMonthAgo, today);
+            //Assert
+            overOneMonth.ShouldBeTrue();
+        }
 
-        //    //Assert
-        //    overOneMonth.ShouldBeTrue();
-        //}
+        [Fact]
+        public void Compares_dates_under_one_month()
+        {
+            //Arange
+            DateTime today = DateTime.Now;
+            DateTime overOneMonthAgo = new DateTime(2021, 6, 25, 0, 0, 0);
+            _patientService = new PatientService(_stubPatientRepository.Object);
+            //Act
+            bool overOneMonth = _patientService.CompareDates(overOneMonthAgo, today);
 
-        //[Fact]
-        //public void Compares_dates_under_one_month()
-        //{
-        //    //Arange
-        //    ArrangeForGetMaliciousPatients();
+            //Assert
+            overOneMonth.ShouldBeFalse();
+        }
+        [Fact]
+        public void Patient_updated_to_malicious()
+        {
+            //Arange
+            Patient maliciousPatient = CreatePatient();
+            _patientService = new PatientService(_stubPatientRepository.Object);
+            //Act
+            Patient patient = _patientService.UpdateMalitiousPatient(false, maliciousPatient);
 
-        //    //Act
-        //    List<PatientDto> patient = _patientService.GetMaliciousPatients();
+            //Assert
+            patient.IsMalicious.ShouldBeTrue();
+        }
+        [Fact]
+        public void Patient_cancelled_appointments_updated_to_one()
+        {
+            //Arange
+            Patient maliciousPatient = CreatePatient();
+            _stubPatientRepository.Setup(x => x.GetPatientByUsername(maliciousPatient.Username)).Returns(CreatePatient);
+            _patientService = new PatientService(_stubPatientRepository.Object);
+            //Act
+            Patient patient = _patientService.UpdateMalitiousPatient(true, maliciousPatient);
 
-        //    //Assert
-        //    patient.ShouldNotBeNull();
-        //    patient.ShouldNotBeEmpty();
-        //    patient.Count.ShouldBeEquivalentTo(2);
-        //}
+            //Assert
+            patient.CancelledMedicalAppointments.ShouldBe(1);
+        }
         #endregion PatientBlockingTests
 
         #region HelperFunctions
@@ -208,6 +232,25 @@ namespace PSW_backendTest.UnitTests
             };
         }
         private Patient CreatePatient()
+        {
+            return new Patient
+            {
+                Id = 1,
+                Name = "Milica",
+                Surname = "Brujic",
+                Username = "mb",
+                Email = "mb@gmail.com",
+                Password = "123",
+                Address = "Laze Teleckog 1",
+                PhoneNumber = "060000000",
+                Role = Roles.Patient,
+                IsBlocked = false,
+                IsMalicious = false,
+                CancelledMedicalAppointments = 2,
+                GeneralDoctorId = 1
+            };
+        }
+        private Patient CreateMaliciousPatient()
         {
             return new Patient
             {

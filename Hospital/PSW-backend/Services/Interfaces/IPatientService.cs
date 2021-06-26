@@ -15,5 +15,6 @@ namespace PSW_backend.Services.Interfaces
         PatientDto BlockPatient(string username);
         List<PatientDto> GetMaliciousPatients();
         Patient UpdateMalitiousPatient(bool checkDates, Patient patientFoundByUsername);
+        bool CompareDates(DateTime lastCancelDate, DateTime today);
     }
 }

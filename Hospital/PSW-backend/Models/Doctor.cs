@@ -11,6 +11,7 @@ namespace PSW_backend.Models
     public class Doctor : User
     {
         public DoctorType Type { get; set; }
+
         public virtual ICollection<MedicalAppointment> MedicalAppointments { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
 
