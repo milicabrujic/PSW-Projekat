@@ -26,7 +26,7 @@
                 @click="cancelAppointment(h.id)"
                 color="deep-purple accent-4"
               >
-                Canceled appointment
+                Cancel appointment
               </v-btn>
             </v-card-actions>
             <div
@@ -61,7 +61,7 @@ export default {
         .post("/api/medicalAppointment/cancelAppointment/" + id)
         .then((appointment) => {
           axios
-            .get("/api/medicalAppointment/proba")
+            .post("/api/patient/malicious/" + this.$store.state.user.username)
             .then((response) => {
               console.log(response);
             })

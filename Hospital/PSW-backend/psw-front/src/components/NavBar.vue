@@ -24,6 +24,10 @@
             snackbarDanger = true;
             snackbarDangerText = 'Can not log in. There is no such user!';
           "
+          @userBlocked="
+            snackbarDanger = true;
+            snackbarDangerText = 'You are blocked by admin!';
+          "
         />
       </div>
       <div class="mx-2">
@@ -61,6 +65,11 @@
       <div class="mx-2" v-if="this.$store.state.user.role == 'Administrator'">
         <router-link to="/notPostedPatientFeedbacksAdmin" class="item"
           >Not Posted Patient Feedbacks</router-link
+        >
+      </div>
+      <div class="mx-2" v-if="this.$store.state.user.role == 'Administrator'">
+        <router-link to="/blockPatient" class="item"
+          >Block Patients</router-link
         >
       </div>
       <div class="mx-2" v-if="this.$store.state.user.role == 'Patient'">

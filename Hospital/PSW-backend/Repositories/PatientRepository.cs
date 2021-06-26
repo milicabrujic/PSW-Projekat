@@ -41,5 +41,23 @@ namespace PSW_backend.Repositories
             _applicationDbContext.Patients.Add(patient);
             _applicationDbContext.SaveChanges();
         }
+
+        public Patient BlockPatient(string username)
+        {
+            Patient patient = GetPatientByUsername(username);
+            patient.IsBlocked = true;
+            _applicationDbContext.SaveChanges();
+            return patient;
+        }
+
+        public List<Patient> GetMaliciousPatients()
+        {
+            return _applicationDbContext.Patients.Where(patient => patient.IsMalicious.Equals(true)).ToList();
+        }
+
+        public void UpdateMaliciousPatient()
+        {
+            _applicationDbContext.SaveChanges();
+        }
     }
 }

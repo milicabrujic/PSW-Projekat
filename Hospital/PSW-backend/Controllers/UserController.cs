@@ -32,6 +32,9 @@ namespace PSW_backend.Controllers
             if (userDto == null)
                 return NotFound();
 
+            if (userDto.IsBlocked)
+                return StatusCode(403);
+
             return Ok(userDto);
         }
     }
