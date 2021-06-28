@@ -5,15 +5,20 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pharmacy.repository.DrugRepository;
+import pharmacy.repository.PrescriptionRepository;
+import pharmacy.service.PrescriptionService;
 
 @Configuration
 public class RabbitMQConfig {
@@ -62,6 +67,9 @@ public class RabbitMQConfig {
         simpleMessageListenerContainer.setQueues(queue());
         simpleMessageListenerContainer.setMessageListener(new RabbitMQListener());
         return simpleMessageListenerContainer;
-
     }
+
+    //@Autowire
+    //private RabbitMQListener rabbitListener;
 }
+

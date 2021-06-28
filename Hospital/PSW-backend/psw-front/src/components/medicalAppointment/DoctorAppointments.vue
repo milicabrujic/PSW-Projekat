@@ -168,6 +168,7 @@ export default {
       Text: "",
       PatientId: null,
       DoctorId: null,
+      DoctorUsername: "",
       DrugNames: [],
     },
     drugs: [],
@@ -227,6 +228,7 @@ export default {
     savePrescription() {
       this.prescription.PatientId = this.appointment.PatientId;
       this.prescription.DoctorId = this.$store.state.user.id;
+      this.prescription.DoctorUsername = this.$store.state.user.username;
 
       axios
         .post("/api/prescription/", this.prescription)

@@ -12,6 +12,7 @@ namespace PSW_backend.Dtos
         public string Text { get; set; }
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
+        public string DoctorUsername { get; set; }
         public List<String> DrugNames { get; set; }
     }
 }
