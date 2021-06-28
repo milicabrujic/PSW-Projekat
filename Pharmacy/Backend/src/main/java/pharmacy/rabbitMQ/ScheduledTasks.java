@@ -11,7 +11,7 @@ import java.util.UUID;
 @Component
 public class ScheduledTasks {
 
-    private final RabbitMQSender rabbitMQSender;
+    /*private final RabbitMQSender rabbitMQSender;
 
     @Autowired
     public ScheduledTasks(RabbitMQSender rabbitMQSender) {
@@ -24,5 +24,5 @@ public class ScheduledTasks {
                new Date());
         rabbitMQSender.send(message);
         System.out.println("Sent :" + message.toString());
-    }
+    } */
 }
