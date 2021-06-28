@@ -6,6 +6,7 @@ using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PSW_backend.Controllers
@@ -16,6 +17,12 @@ namespace PSW_backend.Controllers
     {
         #region Variables
         private IUserService _userService;
+        private HttpClient _httpClient;
+
+        public UserController(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
         #endregion Variables
 
         public UserController(IUserService userService)
@@ -36,6 +43,11 @@ namespace PSW_backend.Controllers
                 return StatusCode(403);
 
             return Ok(userDto);
+        }
+
+        public static implicit operator HttpClient(UserController v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
