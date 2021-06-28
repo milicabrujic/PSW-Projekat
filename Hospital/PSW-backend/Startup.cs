@@ -35,7 +35,9 @@ namespace PSW_backend
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-           
+
+            services.AddHttpClient();
+
             services.AddSpaStaticFiles(configuration: options => { options.RootPath = "wwwroot"; });
             services.AddControllers();
             services.AddControllersWithViews()
