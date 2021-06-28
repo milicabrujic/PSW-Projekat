@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServiceHospital.Protos";
+import "Protos/model.proto";
+
+service SpringGrpcService {
+	rpc communicate (MessageProto) returns (MessageResponseProto);
+}

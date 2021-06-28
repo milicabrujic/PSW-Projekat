@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PSW_backend.Dtos;
+using PSW_backend.Enums;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -41,7 +43,7 @@ namespace PSW_backend.Controllers
 
             return Ok(_patientFeedbackChangedStatusDto);
         }
-
+        [Authorize(Roles = "Patient")]
         [HttpPost()]
         public IActionResult SaveNewPatientFeedback([FromBody] PatientFeedbackDto patientFeedbackDto)
         {

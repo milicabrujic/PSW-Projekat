@@ -18,6 +18,9 @@ using PSW_backend.Repositories.Interfaces;
 using PSW_backend.Repositories;
 using PSW_backend.Services.Interfaces;
 using PSW_backend.Services;
+using Microsoft.AspNetCore.Authentication;
+using PSW_backend.Handlers;
+//using Grpc.Core;
 
 namespace PSW_backend
 {
@@ -35,7 +38,7 @@ namespace PSW_backend
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-           
+            //services.AddGrpc();
             services.AddSpaStaticFiles(configuration: options => { options.RootPath = "wwwroot"; });
             services.AddControllers();
             services.AddControllersWithViews()
@@ -67,6 +70,15 @@ namespace PSW_backend
             services.AddScoped<IDrugService, DrugService>();
             services.AddScoped<IPrescriptionService, PrescriptionService>();
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
             //cors for frontend
             services.AddCors(options =>
             {
@@ -76,7 +88,7 @@ namespace PSW_backend
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:8080");
+                    .WithOrigins("http://localhost:8081");
 
                 });
             });
@@ -98,6 +110,8 @@ namespace PSW_backend
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

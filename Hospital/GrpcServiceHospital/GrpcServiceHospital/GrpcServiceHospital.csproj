@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Protos\model.proto" />
+    <None Remove="Protos\netGrpcService.proto" />
+    <None Remove="Protos\springGrpcService.proto" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
+  </ItemGroup>
+
+ <ItemGroup>
+    <Protobuf Include="Protos\model.proto" GrpcServices="None" />
+    <Protobuf Include="Protos\netGrpcService.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\springGrpcService.proto" GrpcServices="Client" />
+  </ItemGroup>
+</Project>
