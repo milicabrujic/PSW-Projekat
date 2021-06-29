@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using PSW_backend.Adapters;
 using PSW_backend.Controllers;
@@ -19,6 +20,7 @@ namespace PSW_backendTest.UnitTests
     {
         #region Variables
         private readonly Mock<IPatientRepository> _stubPatientRepository;
+        Mock<IConfiguration> _mockConfig = new Mock<IConfiguration>();
         private PatientService _patientService;
         private PatientController _patientController;
         private List<Patient> _patients;
@@ -28,6 +30,7 @@ namespace PSW_backendTest.UnitTests
         public PatientTests()
         {
             _stubPatientRepository = new Mock<IPatientRepository>();
+            _mockConfig = new Mock<IConfiguration>();
 
             _patients = new List<Patient>();
             _patientDtos = new List<PatientDto>();
@@ -94,15 +97,16 @@ namespace PSW_backendTest.UnitTests
             //Assert
             PatientExists.ShouldBeFalse();
         }
-       
+
         [Fact]
         public void Successfully_generates_authentication_token()
         {
             //Arange
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _mockConfig.Setup(x => x["Jwt:Key"]).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiUGF0aWVudCIsIklkIjoiMCIsImV4cCI6MTYyNDk5OTA0MX0.o50TvauSMb8q6FmRgX5h_axjmkavOjvlt4-L3FfbL7M");
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
 
             //Act
-            string authenticationToken = _patientService.GenerateAuthenticationToken();
+            string authenticationToken = _patientService.GenerateAuthenticationToken(CreatePatient());
 
             //Assert
             authenticationToken.ShouldNotBeNull();
@@ -114,7 +118,8 @@ namespace PSW_backendTest.UnitTests
         {
             //Arange
             PatientDto patientDto = CreatePatientDto();
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _mockConfig.Setup(x => x["Jwt:Key"]).Returns("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiUGF0aWVudCIsIklkIjoiMCIsImV4cCI6MTYyNDk5OTA0MX0.o50TvauSMb8q6FmRgX5h_axjmkavOjvlt4-L3FfbL7M");
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
             _patientController = new PatientController(_patientService);
 
             //Act
@@ -148,7 +153,7 @@ namespace PSW_backendTest.UnitTests
             Patient patientTemp = CreatePatient();
 
             _stubPatientRepository.Setup(x => x.BlockPatient(patientMalicious.Username)).Returns(CreateMaliciousPatients().Find(patient => patient.Username == patientMalicious.Username));
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
 
             //Act
             PatientDto patient = _patientService.BlockPatient(patientMalicious.Username);
@@ -163,7 +168,7 @@ namespace PSW_backendTest.UnitTests
             //Arange
             DateTime today = DateTime.Now;
             DateTime overOneMonthAgo = new DateTime(2020, 1, 1, 0, 0, 0);
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
             //Act
             bool overOneMonth = _patientService.CompareDates(overOneMonthAgo, today);
 
@@ -177,7 +182,7 @@ namespace PSW_backendTest.UnitTests
             //Arange
             DateTime today = DateTime.Now;
             DateTime overOneMonthAgo = new DateTime(2021, 6, 25, 0, 0, 0);
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
             //Act
             bool overOneMonth = _patientService.CompareDates(overOneMonthAgo, today);
 
@@ -189,7 +194,7 @@ namespace PSW_backendTest.UnitTests
         {
             //Arange
             Patient maliciousPatient = CreatePatient();
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
             //Act
             Patient patient = _patientService.UpdateMalitiousPatient(false, maliciousPatient);
 
@@ -202,7 +207,7 @@ namespace PSW_backendTest.UnitTests
             //Arange
             Patient maliciousPatient = CreatePatient();
             _stubPatientRepository.Setup(x => x.GetPatientByUsername(maliciousPatient.Username)).Returns(CreatePatient);
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
             //Act
             Patient patient = _patientService.UpdateMalitiousPatient(true, maliciousPatient);
 
@@ -388,7 +393,8 @@ namespace PSW_backendTest.UnitTests
         {
             _stubPatientRepository.Setup(x => x.GetPatientByUsername(username)).Returns(CreatePatients().Find(patient => patient.Username == username));
             _stubPatientRepository.Setup(x => x.GetPatientByEmail(email)).Returns(CreatePatients().Find(patient => patient.Email == email));
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            //_mockConfig.Setup();
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
         }
 
         private void ArrangeForGetMaliciousPatients()
@@ -396,7 +402,7 @@ namespace PSW_backendTest.UnitTests
             _patients = CreateMaliciousPatients();
             _patientDtos = CreateMaliciousPatientsDto();
             _stubPatientRepository.Setup(x => x.GetMaliciousPatients()).Returns(_patients);
-            _patientService = new PatientService(_stubPatientRepository.Object);
+            _patientService = new PatientService(_stubPatientRepository.Object, _mockConfig.Object);
             _patientController = new PatientController(_patientService);
         }
         #endregion HelperFunctions

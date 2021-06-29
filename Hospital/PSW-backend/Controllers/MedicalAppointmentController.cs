@@ -28,33 +28,50 @@ namespace PSW_backend.Controllers
             MedicalAppointmentDto appointment = _medicalAppointmentService.FindAppointment(medicalAppointmentDto, priority);
             return Ok(appointment);
         }
+
         [HttpPost]
         public IActionResult CreateAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto)
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             _medicalAppointmentService.SaveAppointment(medicalAppointmentDto);
             return Ok(medicalAppointmentDto);
         }
+
         [HttpGet("activeAppointmentsDoctor/{id?}")]
         public IActionResult GetDoctorActiveAppointments(int id)
         {
           List<MedicalAppointment> doctorActiveAppointments =  _medicalAppointmentService.GetDoctorActiveAppointments(id);
             return Ok(doctorActiveAppointments);
         }
+
         [HttpGet("appointmentsPatient/{id?}")]
         public IActionResult GetPatientAppointments(int id)
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             List<MedicalAppointmentHistoryDto> medicalAppointmentsPatient = _medicalAppointmentService.GetPatientAppointments(id);
             return Ok(medicalAppointmentsPatient);
         }
+
         [HttpPost("end")]
         public IActionResult EndMedicalAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto)
         {
+            if (!Authorization.Authorize("Doctor", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             MedicalAppointmentDto appointment = _medicalAppointmentService.EndMedicalAppointment(medicalAppointmentDto.Id);
             return Ok(appointment);
         }
+
         [HttpPost("cancelAppointment/{id?}")]
         public IActionResult CancelMedicalAppointment(int id)
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             MedicalAppointmentDto appointmentDto = _medicalAppointmentService.CancelMedicalAppointment(id);
             return Ok(appointmentDto);
         }

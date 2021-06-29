@@ -14,5 +14,8 @@ namespace PSW_backend.Services.Interfaces
         public User CheckIfUsernameIsValid(string Username);
 
         public bool CheckIfPasswordIsValid(string userPassword, string loginDtoPassword);
+        
+        public string AddClaims(User user);
+
     }
 }

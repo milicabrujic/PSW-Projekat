@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Authorization = PSW_backend.Models.Authorization;
 
 namespace PSW_backend.Controllers
 {
@@ -37,6 +38,9 @@ namespace PSW_backend.Controllers
         [HttpPost("malicious/{username?}")]
         public IActionResult MaliciousPatient(string username)
         {
+            if (!Authorization.Authorize("Administrator", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             _patientService.CheckMaliciousPatient(username);
             return Ok();
         }
@@ -44,6 +48,9 @@ namespace PSW_backend.Controllers
         [HttpPut("block/{username?}")]
         public IActionResult BlockPatient(string username)
         {
+            if (!Authorization.Authorize("Administrator", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             _patientService.BlockPatient(username);
             return Ok();
         }
@@ -51,6 +58,9 @@ namespace PSW_backend.Controllers
         [HttpGet("maliciousPatients")]
         public IActionResult GetMaliciousPatients()
         {
+            if (!Authorization.Authorize("Administrator", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             List<PatientDto> patientDtos = _patientService.GetMaliciousPatients();
             return Ok(patientDtos);
         }

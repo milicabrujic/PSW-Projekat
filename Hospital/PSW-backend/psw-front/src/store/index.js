@@ -11,10 +11,10 @@ export default new Vuex.Store({
             role: "None",
             username: "",
             active: true,
-            id: ""
+            id: "",
         },
         loggedUser: false,
-        token: "",
+        token: "noToken",
     },
     mutations: {
         login(state, item) {
