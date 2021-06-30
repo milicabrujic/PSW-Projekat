@@ -21,7 +21,7 @@ namespace PSW_backend.Services
         private readonly IUserRepository _userRepository;
         //private IConfiguration _config;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository /*,IConfiguration config*/)
         {
             this._userRepository = userRepository;
             //this._config = config;
