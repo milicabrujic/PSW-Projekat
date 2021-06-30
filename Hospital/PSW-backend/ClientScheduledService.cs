@@ -1,6 +1,8 @@
 ﻿//using Com.Example.Grpc;
 using Grpc.Core;
 using Microsoft.Extensions.Hosting;
+using PSW_backend.Dtos;
+using PSW_backend.Models;
 using Rs.Ac.Uns.Ftn.Grpc;
 using System;
 using System.Collections.Generic;
@@ -29,13 +31,25 @@ namespace PSW_backend
             timer.Enabled = true;
             return Task.CompletedTask;
         }
+        public Task getDrugFromPharmacy(string name)
+        {
+            channel = new Channel("127.0.0.1:8787", ChannelCredentials.Insecure);
+            client = new SpringGrpcService.SpringGrpcServiceClient(channel);
+            timer = new System.Timers.Timer();
+            timer.Elapsed += new ElapsedEventHandler(SendMessage);
+            timer.Interval = 3300; // number in miliseconds  
+            timer.Enabled = true;
+            return Task.CompletedTask;
+        }
+
+      
 
         private async void SendMessage(object source, ElapsedEventArgs e)
         {
             try
             {
                 MessageResponseProto response = await client.communicateAsync(new MessageProto() { Message = "Random message from asp.net client: " + Guid.NewGuid().ToString(), RandomInteger = new Random().Next(1, 101) });
-                Console.WriteLine(response.Response + " is response; status: " + response.Status);
+                Console.WriteLine(response.Response + " is response; status: " + response.Status + response.Medication);
             }
             catch (Exception exc)
             {
