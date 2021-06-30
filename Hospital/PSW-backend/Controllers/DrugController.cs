@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PSW_backend.Dtos;
+using PSW_backend.Models;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,9 @@ namespace PSW_backend.Controllers
         [HttpGet()]
         public IActionResult GetDrugs()
         {
+            if (!Authorization.Authorize("Doctor", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             List<DrugDto> drugs = _drugService.GetDrugs();
             return Ok(drugs);
         }

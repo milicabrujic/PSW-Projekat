@@ -4,8 +4,10 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import axios from "axios";
+import interceptorsSetup from "./interceptors";
 
 axios.defaults.baseURL = "https://localhost:44393/";
+interceptorsSetup();
 Vue.config.productionTip = false;
 
 new Vue({

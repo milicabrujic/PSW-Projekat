@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PSW_backend.Adapters;
 using PSW_backend.Controllers;
@@ -9,6 +10,7 @@ using PSW_backend.Services;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using Xunit;
 
@@ -80,8 +82,10 @@ namespace PSW_backendTest.UnitTests
         public void Get_drugs_controller()
         {
             //Arrange
+            //var request = new HttpRequestMessage(HttpMethod.Get, "http://stackoverflow");
+            //request.Headers.Add("Authorization", "Doctor");
             ArrangeForGetDrugs();
-         
+
             //Act
             var actionResult = _drugController.GetDrugs();
 

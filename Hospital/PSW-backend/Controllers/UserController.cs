@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PSW_backend.Adapters;
 using PSW_backend.Dtos;
 using PSW_backend.Models;
 using PSW_backend.Services.Interfaces;
@@ -19,10 +20,6 @@ namespace PSW_backend.Controllers
         private IUserService _userService;
         private HttpClient _httpClient;
 
-        public UserController(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
         #endregion Variables
 
         public UserController(IUserService userService)
@@ -35,7 +32,7 @@ namespace PSW_backend.Controllers
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
             UserDto userDto = _userService.Login(loginDto);
-
+            
             if (userDto == null)
                 return NotFound();
 
@@ -45,9 +42,5 @@ namespace PSW_backend.Controllers
             return Ok(userDto);
         }
 
-        public static implicit operator HttpClient(UserController v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PSW_backend.Dtos;
+using PSW_backend.Models;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,9 @@ namespace PSW_backend.Controllers
         [HttpPost()]
         public IActionResult SaveNewPrescription([FromBody] PrescriptionDto prescriptionDto)
         {
+            if (!Authorization.Authorize("Doctor", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             _prescriptionService.SaveNewPrescription(prescriptionDto);
             return Ok(prescriptionDto);
         }
