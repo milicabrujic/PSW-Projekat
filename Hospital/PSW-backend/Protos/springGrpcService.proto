@@ -1,0 +1,11 @@
+
+syntax = "proto3";
+
+//package com.example.grpc;
+//option csharp_namespace = "PSW_backend.Protos";
+package rs.ac.uns.ftn.grpc;
+import "Protos/model.proto";
+
+service SpringGrpcService {
+	rpc communicate (MessageProto) returns (MessageResponseProto);
+}
