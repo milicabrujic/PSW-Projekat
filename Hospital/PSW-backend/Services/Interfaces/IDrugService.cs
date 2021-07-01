@@ -11,6 +11,7 @@ namespace PSW_backend.Services.Interfaces
     public interface IDrugService
     {
         List<DrugDto> GetDrugs();
-        MessageResponseProto GetDrugFromPharmacy(string drugName);
+        DrugDto GetDrugFromPharmacy(string drugName);
+        DrugDto AddDrug(DrugDto drugDto);
     }
 }

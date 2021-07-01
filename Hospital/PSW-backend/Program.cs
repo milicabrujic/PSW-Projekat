@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PSW_backend.Dtos;
+using PSW_backend.Services.Interfaces;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;

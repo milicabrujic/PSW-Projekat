@@ -29,12 +29,16 @@ namespace PSW_backend.Controllers
             return Ok(drugs);
         }
         [HttpGet("{drugName}")]
-        public MessageResponseProto GetDrug(string drugName)
+        public DrugDto GetDrug(string drugName)
         {
-           // List<DrugDto> drugs = _drugService.GetDrugs();
-            MessageResponseProto messageResponseProto = _drugService.GetDrugFromPharmacy(drugName);
-            Console.WriteLine(messageResponseProto.Medication);
-            return messageResponseProto;
+            DrugDto drugDto = _drugService.GetDrugFromPharmacy(drugName);
+            return drugDto;
+        }
+        [HttpPost()]
+        public DrugDto AddDrug(DrugDto drugDto)
+        {
+            DrugDto drug = _drugService.AddDrug(drugDto);
+            return drug;
         }
     }
 }

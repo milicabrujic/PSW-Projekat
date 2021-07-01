@@ -81,7 +81,7 @@ namespace PSW_backend
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:8080");
+                    .WithOrigins("http://localhost:8081");
 
                 });
             });

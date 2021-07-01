@@ -17,12 +17,6 @@ namespace PSW_backend.Controllers
     {
         #region Variables
         private IUserService _userService;
-        private HttpClient _httpClient;
-
-        public UserController(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
         #endregion Variables
 
         public UserController(IUserService userService)
@@ -45,9 +39,6 @@ namespace PSW_backend.Controllers
             return Ok(userDto);
         }
 
-        public static implicit operator HttpClient(UserController v)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

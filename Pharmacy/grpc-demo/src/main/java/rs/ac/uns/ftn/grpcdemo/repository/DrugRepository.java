@@ -11,8 +11,8 @@ public class DrugRepository {
 
   public List<DrugDto> createDrugs() {
          List<DrugDto> drugs = new ArrayList<DrugDto>();
-         drugs.add(new DrugDto(1,"brufen",5));
-         drugs.add(new DrugDto(2,"kafetin",10));
+         drugs.add(new DrugDto(200,"brufen",5));
+         drugs.add(new DrugDto(201,"kafetin",10));
          return drugs;
     }
 

@@ -1,4 +1,6 @@
-﻿using PSW_backend.Models;
+﻿using PSW_backend.Adapters;
+using PSW_backend.Dtos;
+using PSW_backend.Models;
 using PSW_backend.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,13 @@ namespace PSW_backend.Repositories
         public Drug GetDrugByName(string name)
         {
             return _applicationDbContext.Drugs.FirstOrDefault(drug => drug.Name.Equals(name));
+        }
+
+        public DrugDto addDrug(Drug drug)
+        {
+            _applicationDbContext.Drugs.Add(drug);
+            _applicationDbContext.SaveChanges();
+            return DrugAdapter.DrugToDrugDto(drug);
         }
     }
 }

@@ -21,8 +21,8 @@ public class CommunicationService extends SpringGrpcServiceGrpc.SpringGrpcServic
 
     @Override
     public void communicate(MessageProto request, StreamObserver<MessageResponseProto> responseObserver) {
-        System.out.println("Message: " + request.getMessage() + "; randomInteger: " + request.getRandomInteger());
-        DrugDto drug = drugRepository.findByName("brufen");
+        System.out.println("Message: " + request.getMessage() + "; randomInteger: " + request.getRandomInteger() );
+        DrugDto drug = drugRepository.findByName(request.getMedication());
         System.out.println(drug.getName());
         MessageResponseProto responseMessage;
         if(drug != null) {

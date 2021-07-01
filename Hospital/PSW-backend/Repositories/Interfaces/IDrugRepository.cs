@@ -1,4 +1,5 @@
-﻿using PSW_backend.Models;
+﻿using PSW_backend.Dtos;
+using PSW_backend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace PSW_backend.Repositories.Interfaces
     {
          List<Drug> GetDrugs();
          Drug GetDrugByName(string name);
+        DrugDto addDrug(Drug drug);
     }
 }

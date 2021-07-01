@@ -77,6 +77,9 @@
           >Add Feedback</router-link
         >
       </div>
+      <div class="mx-2" v-if="this.$store.state.user.role == 'Administrator'">
+        <router-link to="/addDrug" class="item">Add Drugs</router-link>
+      </div>
       <v-btn
         to="/"
         text

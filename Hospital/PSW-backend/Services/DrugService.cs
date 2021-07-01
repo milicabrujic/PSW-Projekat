@@ -1,6 +1,7 @@
 ﻿using Grpc.Core;
 using PSW_backend.Adapters;
 using PSW_backend.Dtos;
+using PSW_backend.Models;
 using PSW_backend.Repositories.Interfaces;
 using PSW_backend.Services.Interfaces;
 using Rs.Ac.Uns.Ftn.Grpc;
@@ -30,7 +31,7 @@ namespace PSW_backend.Services
             return drugDtos;
         }
 
-        public MessageResponseProto GetDrugFromPharmacy(string drugName)
+        public DrugDto GetDrugFromPharmacy(string drugName)
         {
             channel = new Channel("127.0.0.1:8787", ChannelCredentials.Insecure);
             client = new SpringGrpcService.SpringGrpcServiceClient(channel);
@@ -38,11 +39,12 @@ namespace PSW_backend.Services
             {
                 Message = "get drug",
                 RandomInteger = 1,
-                Medication = "brufen"
+                Medication = drugName
             };
             MessageResponseProto response = client.communicate(messageProto);
+            DrugDto drug = FromMedicationProtoToMedication(response.Medication);
             Console.WriteLine(response.Medication);
-            return response;
+            return drug;
            
         }
 
@@ -53,6 +55,12 @@ namespace PSW_backend.Services
             drug.Name = medication.Name;
             drug.Amount = (int)medication.Amount;
             return drug;
+        }
+
+        public DrugDto AddDrug(DrugDto drugDto)
+        {
+            Drug drug = DrugAdapter.DrugDtoToDrug(drugDto); 
+            return _drugRepository.addDrug(drug);
         }
     }
 }

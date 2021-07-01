@@ -8,49 +8,55 @@ import PostedPatientFeedbacksAdmin from "../components/patientFeedbacks/PostedPa
 import NotPostedPatientFeedbacksAdmin from "../components/patientFeedbacks/NotPostedPatientFeedbacksAdmin.vue";
 import AddNewFeedback from "../components/patientFeedbacks/AddNewFeedback.vue";
 import BlockPatient from "../components/blockPatient/BlockPatient.vue";
+import GetDrug from "../components/Drugs/GetDrug.vue"
 
 Vue.use(VueRouter);
 
 const routes = [{
-        path: "/",
-        name: "HomePage",
-        component: HomePage,
-    },
-    {
-        path: "/createAppointment",
-        name: "Medical Appointment",
-        component: MedicalAppointment,
-    },
-    {
-        path: "/doctorAppointments",
-        name: "Doctor Appointments",
-        component: DoctorAppointments,
-    },
-    {
-        path: "/patientAppointments",
-        name: "Patient Appointments",
-        component: PatientAppointments,
-    },
-    {
-        path: "/postedPatientFeedbacksAdmin",
-        name: "Posted Patient Feedbacks Admin",
-        component: PostedPatientFeedbacksAdmin,
-    },
-    {
-        path: "/notPostedPatientFeedbacksAdmin",
-        name: "Not Posted Patient Feedbacks Admin",
-        component: NotPostedPatientFeedbacksAdmin,
-    },
-    {
-        path: "/addNewFeedback",
-        name: "Add New Feedback",
-        component: AddNewFeedback,
-    },
-    {
-        path: "/blockpatient",
-        name: "Block Patient",
-        component: BlockPatient,
-    },
+    path: "/",
+    name: "HomePage",
+    component: HomePage,
+},
+{
+    path: "/createAppointment",
+    name: "Medical Appointment",
+    component: MedicalAppointment,
+},
+{
+    path: "/doctorAppointments",
+    name: "Doctor Appointments",
+    component: DoctorAppointments,
+},
+{
+    path: "/patientAppointments",
+    name: "Patient Appointments",
+    component: PatientAppointments,
+},
+{
+    path: "/postedPatientFeedbacksAdmin",
+    name: "Posted Patient Feedbacks Admin",
+    component: PostedPatientFeedbacksAdmin,
+},
+{
+    path: "/notPostedPatientFeedbacksAdmin",
+    name: "Not Posted Patient Feedbacks Admin",
+    component: NotPostedPatientFeedbacksAdmin,
+},
+{
+    path: "/addNewFeedback",
+    name: "Add New Feedback",
+    component: AddNewFeedback,
+},
+{
+    path: "/blockpatient",
+    name: "Block Patient",
+    component: BlockPatient,
+},
+{
+    path: "/addDrug",
+    name: "Get Drug",
+    component: GetDrug,
+},
 ];
 
 const router = new VueRouter({
