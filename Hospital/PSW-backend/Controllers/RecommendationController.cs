@@ -34,6 +34,9 @@ namespace PSW_backend.Controllers
         [HttpGet("{patientId?}")]
         public IActionResult GetPatientRecommendation(int patientId)
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             List<Recommendation> recommendations = _recommendationService.GetPatientRecommendation(patientId);
             return Ok(recommendations);
         }

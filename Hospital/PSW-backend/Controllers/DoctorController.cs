@@ -25,13 +25,19 @@ namespace PSW_backend.Controllers
         [HttpGet("patientGeneralDoctor/{patientId?}")]       // GET / patientGeneralDoctor / id
         public IActionResult GetGeneralDoctor(string patientId)
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             Doctor generalDoctor = _doctorService.GetGeneralDoctor(patientId);
             return Ok(generalDoctor);
         }
 
-        [HttpGet("specialists")]    
+        [HttpGet("specialists")]
         public IActionResult GetSpecialists()
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]) && (!Authorization.Authorize("Doctor", Request?.Headers["Authorization"])))
+                return Unauthorized();
+
             List<Doctor> specialists = _doctorService.GetSpecialists();
             return Ok(specialists);
         }
@@ -39,6 +45,9 @@ namespace PSW_backend.Controllers
         [HttpGet("generalDoctors")]
         public IActionResult GetGeneralDoctors()
         {
+            if(!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             List<DoctorDto> generalDoctors = _doctorService.GetGeneralDoctors();
             return Ok(generalDoctors);
         }

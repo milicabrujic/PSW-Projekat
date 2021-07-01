@@ -6,7 +6,7 @@ import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import interceptorsSetup from "./interceptors";
 
-axios.defaults.baseURL = "https://localhost:44393/";
+axios.defaults.baseURL = "http://localhost:5000/";
 interceptorsSetup();
 Vue.config.productionTip = false;
 

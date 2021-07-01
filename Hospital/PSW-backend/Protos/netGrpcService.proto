@@ -1,0 +1,10 @@
+
+syntax = "proto3";
+
+//option csharp_namespace = "PSW-backend.Protos";
+package rs.ac.uns.ftn.grpc;
+import "Protos/model.proto";
+
+service NetGrpcService {
+	rpc transfer (MessageProto) returns (MessageResponseProto);
+}

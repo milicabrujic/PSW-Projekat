@@ -25,6 +25,9 @@ namespace PSW_backend.Controllers
         [HttpPost("find/{priority?}")]
         public IActionResult FindMedicalAppointment([FromBody] MedicalAppointmentDto medicalAppointmentDto, string priority)
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             MedicalAppointmentDto appointment = _medicalAppointmentService.FindAppointment(medicalAppointmentDto, priority);
             return Ok(appointment);
         }
@@ -42,7 +45,10 @@ namespace PSW_backend.Controllers
         [HttpGet("activeAppointmentsDoctor/{id?}")]
         public IActionResult GetDoctorActiveAppointments(int id)
         {
-          List<MedicalAppointment> doctorActiveAppointments =  _medicalAppointmentService.GetDoctorActiveAppointments(id);
+            if (!Authorization.Authorize("Doctor", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
+            List<MedicalAppointment> doctorActiveAppointments =  _medicalAppointmentService.GetDoctorActiveAppointments(id);
             return Ok(doctorActiveAppointments);
         }
 

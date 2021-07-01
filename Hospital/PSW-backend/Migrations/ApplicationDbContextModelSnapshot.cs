@@ -130,7 +130,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(2861),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(2542),
                             IsPosted = true,
                             PatientId = 6,
                             Text = "Great Hospital."
@@ -138,7 +138,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4196),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5525),
                             IsPosted = true,
                             PatientId = 7,
                             Text = "Great service."
@@ -146,7 +146,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4230),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5606),
                             IsPosted = true,
                             PatientId = 6,
                             Text = "Great treetment."
@@ -154,7 +154,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4234),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5615),
                             IsPosted = true,
                             PatientId = 8,
                             Text = "Nice doctors."
@@ -162,7 +162,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 5,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4237),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5621),
                             IsPosted = true,
                             PatientId = 8,
                             Text = "Nice personel."
@@ -170,7 +170,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 6,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4241),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5627),
                             IsPosted = true,
                             PatientId = 6,
                             Text = "Polite workers."
@@ -178,7 +178,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 7,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4244),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5632),
                             IsPosted = false,
                             PatientId = 7,
                             Text = "Bad service."
@@ -186,7 +186,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 8,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4247),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5637),
                             IsPosted = false,
                             PatientId = 7,
                             Text = "Impolite doctors."
@@ -194,7 +194,7 @@ namespace PSW_backend.Migrations
                         new
                         {
                             Id = 9,
-                            Date = new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4250),
+                            Date = new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5643),
                             IsPosted = false,
                             PatientId = 8,
                             Text = "Long waitings."
@@ -460,7 +460,7 @@ namespace PSW_backend.Migrations
                             Username = "mb",
                             CancelledMedicalAppointments = 2,
                             GeneralDoctorId = 2,
-                            LastCanceledDate = new DateTime(2021, 6, 30, 19, 59, 58, 707, DateTimeKind.Local).AddTicks(5275)
+                            LastCanceledDate = new DateTime(2021, 7, 1, 23, 7, 21, 944, DateTimeKind.Local).AddTicks(1612)
                         },
                         new
                         {
@@ -478,7 +478,7 @@ namespace PSW_backend.Migrations
                             Username = "aa",
                             CancelledMedicalAppointments = 1,
                             GeneralDoctorId = 2,
-                            LastCanceledDate = new DateTime(2021, 6, 30, 19, 59, 58, 709, DateTimeKind.Local).AddTicks(9199)
+                            LastCanceledDate = new DateTime(2021, 7, 1, 23, 7, 21, 947, DateTimeKind.Local).AddTicks(6029)
                         },
                         new
                         {
@@ -496,7 +496,7 @@ namespace PSW_backend.Migrations
                             Username = "ll",
                             CancelledMedicalAppointments = 1,
                             GeneralDoctorId = 3,
-                            LastCanceledDate = new DateTime(2021, 6, 30, 19, 59, 58, 709, DateTimeKind.Local).AddTicks(9239)
+                            LastCanceledDate = new DateTime(2021, 7, 1, 23, 7, 21, 947, DateTimeKind.Local).AddTicks(6216)
                         });
                 });
 

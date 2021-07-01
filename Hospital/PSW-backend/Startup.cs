@@ -19,13 +19,16 @@ using PSW_backend.Repositories;
 using PSW_backend.Services.Interfaces;
 using PSW_backend.Services;
 using Microsoft.IdentityModel.Logging;
+using Grpc.Core;
+using Rs.Ac.Uns.Ftn.Grpc;
+
 
 namespace PSW_backend
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-
+        private Server server;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,7 +39,7 @@ namespace PSW_backend
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+          //  private Server server;
             services.AddHttpClient();
 
             services.AddSpaStaticFiles(configuration: options => { options.RootPath = "wwwroot"; });
@@ -79,7 +82,7 @@ namespace PSW_backend
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
-                    .WithOrigins("http://localhost:8080");
+                    .WithOrigins("http://localhost:8081");
 
                 });
             });
@@ -88,7 +91,7 @@ namespace PSW_backend
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext applicationDbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext applicationDbContext, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -102,6 +105,25 @@ namespace PSW_backend
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+             server = new Server
+            {
+                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
+                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+            };
+            server.Start();
+
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
         }
+
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
+
+        }
+
     }
 }

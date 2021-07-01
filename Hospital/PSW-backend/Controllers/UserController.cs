@@ -18,8 +18,6 @@ namespace PSW_backend.Controllers
     {
         #region Variables
         private IUserService _userService;
-        private HttpClient _httpClient;
-
         #endregion Variables
 
         public UserController(IUserService userService)
@@ -42,5 +40,6 @@ namespace PSW_backend.Controllers
             return Ok(userDto);
         }
 
+      
     }
 }

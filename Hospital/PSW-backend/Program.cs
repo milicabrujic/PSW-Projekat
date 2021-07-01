@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PSW_backend.Dtos;
+using PSW_backend.Services.Interfaces;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
@@ -57,6 +59,10 @@ namespace PSW_backend
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                services.AddHostedService<ClientScheduledService>();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

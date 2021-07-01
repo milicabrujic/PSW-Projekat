@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace PSW_backend.Migrations
 {
-    public partial class HopsitalAppMigration : Migration
+    public partial class HospitalAppMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -283,9 +283,9 @@ namespace PSW_backend.Migrations
                 columns: new[] { "Id", "CancelledMedicalAppointments", "GeneralDoctorId", "LastCanceledDate" },
                 values: new object[,]
                 {
-                    { 6, 2, 2, new DateTime(2021, 6, 30, 19, 59, 58, 707, DateTimeKind.Local).AddTicks(5275) },
-                    { 7, 1, 2, new DateTime(2021, 6, 30, 19, 59, 58, 709, DateTimeKind.Local).AddTicks(9199) },
-                    { 8, 1, 3, new DateTime(2021, 6, 30, 19, 59, 58, 709, DateTimeKind.Local).AddTicks(9239) }
+                    { 6, 2, 2, new DateTime(2021, 7, 1, 23, 7, 21, 944, DateTimeKind.Local).AddTicks(1612) },
+                    { 7, 1, 2, new DateTime(2021, 7, 1, 23, 7, 21, 947, DateTimeKind.Local).AddTicks(6029) },
+                    { 8, 1, 3, new DateTime(2021, 7, 1, 23, 7, 21, 947, DateTimeKind.Local).AddTicks(6216) }
                 });
 
             migrationBuilder.InsertData(
@@ -293,15 +293,15 @@ namespace PSW_backend.Migrations
                 columns: new[] { "Id", "Date", "IsPosted", "PatientId", "Text" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(2861), true, 6, "Great Hospital." },
-                    { 3, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4230), true, 6, "Great treetment." },
-                    { 6, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4241), true, 6, "Polite workers." },
-                    { 2, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4196), true, 7, "Great service." },
-                    { 7, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4244), false, 7, "Bad service." },
-                    { 8, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4247), false, 7, "Impolite doctors." },
-                    { 4, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4234), true, 8, "Nice doctors." },
-                    { 5, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4237), true, 8, "Nice personel." },
-                    { 9, new DateTime(2021, 6, 30, 19, 59, 58, 710, DateTimeKind.Local).AddTicks(4250), false, 8, "Long waitings." }
+                    { 1, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(2542), true, 6, "Great Hospital." },
+                    { 3, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5606), true, 6, "Great treetment." },
+                    { 6, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5627), true, 6, "Polite workers." },
+                    { 2, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5525), true, 7, "Great service." },
+                    { 7, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5632), false, 7, "Bad service." },
+                    { 8, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5637), false, 7, "Impolite doctors." },
+                    { 4, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5615), true, 8, "Nice doctors." },
+                    { 5, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5621), true, 8, "Nice personel." },
+                    { 9, new DateTime(2021, 7, 1, 23, 7, 21, 948, DateTimeKind.Local).AddTicks(5643), false, 8, "Long waitings." }
                 });
 
             migrationBuilder.InsertData(

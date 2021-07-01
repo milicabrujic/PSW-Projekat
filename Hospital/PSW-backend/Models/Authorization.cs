@@ -10,7 +10,7 @@ namespace PSW_backend.Models
     {
         public static Boolean Authorize(String role, String token)
         {
-            if (token is null)
+            if (token is null || token == "")
                 token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
             
             var handler = new JwtSecurityTokenHandler();
