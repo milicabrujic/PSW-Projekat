@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using PSW_backend.Adapters;
 using PSW_backend.Dtos;
 using PSW_backend.Models;
@@ -8,7 +10,9 @@ using PSW_backend.Services.Interfaces;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,10 +21,12 @@ namespace PSW_backend.Services
     public class PatientService : IPatientService
     {
         private readonly IPatientRepository _patientRepository;
+        private IConfiguration _config;
 
-        public PatientService(IPatientRepository patientRepository)
+        public PatientService(IPatientRepository patientRepository, IConfiguration config)
         {
             this._patientRepository = patientRepository;
+            this._config = config;
         }
 
         public bool CheckIfPatientExists(string username, string email)
@@ -37,20 +43,28 @@ namespace PSW_backend.Services
         public void RegisterPatient(PatientDto patientDto)
         {
             Patient patient = PatientAdapter.PatientDtoToPatient(patientDto);
-            patient.AuthenticationToken = GenerateAuthenticationToken();
+            patient.AuthenticationToken = GenerateAuthenticationToken(patient);
 
             _patientRepository.SavePatient(patient);
         }
 
-        public String GenerateAuthenticationToken()
+        public String GenerateAuthenticationToken(User user)
         {
-            var allChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var random = new Random();
-            var authenticationToken = new string(
-               Enumerable.Repeat(allChar, 8)
-               .Select(token => token[random.Next(token.Length)]).ToArray()).ToString();
+            var issuer = _config["Jwt:Issuer"];
+            var audience = _config["Jwt:Audience"];
+            var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claimUserType = new Claim("type", user.Role.ToString());
+            var claimId = new Claim("Id", user.Id.ToString());
+            var claims = new List<Claim>();
+            claims.Add(claimUserType);
+            claims.Add(claimId);
 
-            return authenticationToken;
+            var token = new JwtSecurityToken(issuer: issuer, claims: claims, audience: audience, expires: DateTime.Now.AddMinutes(60), signingCredentials: credentials);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var stringToken = tokenHandler.WriteToken(token);
+            return stringToken;
         }
 
         public bool CompareDates(DateTime lastCancelDate, DateTime today)

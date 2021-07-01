@@ -18,6 +18,7 @@ using PSW_backend.Repositories.Interfaces;
 using PSW_backend.Repositories;
 using PSW_backend.Services.Interfaces;
 using PSW_backend.Services;
+using Microsoft.IdentityModel.Logging;
 using Grpc.Core;
 using Rs.Ac.Uns.Ftn.Grpc;
 

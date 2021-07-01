@@ -24,13 +24,20 @@ namespace PSW_backend.Controllers
         [HttpPost]
         public IActionResult CreateRecommendation([FromBody] RecommendationDto recommendationDto)
         {
+            if (!Authorization.Authorize("Doctor", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             _recommendationService.SaveRecommendation(recommendationDto);
             return Ok(recommendationDto);
         }
+
         [HttpGet("{patientId?}")]
         public IActionResult GetPatientRecommendation(int patientId)
         {
-           List<Recommendation> recommendations = _recommendationService.GetPatientRecommendation(patientId);
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
+            List<Recommendation> recommendations = _recommendationService.GetPatientRecommendation(patientId);
             return Ok(recommendations);
         }
     }

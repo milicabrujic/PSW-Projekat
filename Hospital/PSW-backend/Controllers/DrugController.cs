@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PSW_backend.Dtos;
+using PSW_backend.Models;
 using PSW_backend.Services.Interfaces;
 using Rs.Ac.Uns.Ftn.Grpc;
 using System;
@@ -25,20 +26,28 @@ namespace PSW_backend.Controllers
         [HttpGet()]
         public IActionResult GetDrugs()
         {
+            if (!Authorization.Authorize("Doctor", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             List<DrugDto> drugs = _drugService.GetDrugs();
             return Ok(drugs);
         }
         [HttpGet("{drugName}")]
-        public DrugDto GetDrug(string drugName)
+        public IActionResult GetDrug(string drugName)
         {
+            if (!Authorization.Authorize("Administrator", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             DrugDto drugDto = _drugService.GetDrugFromPharmacy(drugName);
-            return drugDto;
+            return Ok(drugDto);
         }
         [HttpPost()]
-        public DrugDto AddDrug(DrugDto drugDto)
+        public IActionResult AddDrug(DrugDto drugDto)
         {
+            if (!Authorization.Authorize("Administrator", Request?.Headers["Authorization"]))
+                return Unauthorized();
             DrugDto drug = _drugService.AddDrug(drugDto);
-            return drug;
+            return Ok(drug);
         }
     }
 }

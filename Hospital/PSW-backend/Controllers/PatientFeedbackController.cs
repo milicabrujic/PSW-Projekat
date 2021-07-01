@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PSW_backend.Dtos;
+using PSW_backend.Models;
 using PSW_backend.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,9 @@ namespace PSW_backend.Controllers
         [HttpPut()]
         public IActionResult ChangePatientFeedbackStatus([FromBody] PatientFeedbackDto patientFeedbackDto)
         {
+            if (!Authorization.Authorize("Administrator", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             PatientFeedbackDto _patientFeedbackChangedStatusDto = _patientFeedbackService.ChangePatientFeedbackStatus(patientFeedbackDto);
 
             if (_patientFeedbackChangedStatusDto == null)
@@ -45,6 +50,9 @@ namespace PSW_backend.Controllers
         [HttpPost()]
         public IActionResult SaveNewPatientFeedback([FromBody] PatientFeedbackDto patientFeedbackDto)
         {
+            if (!Authorization.Authorize("Patient", Request?.Headers["Authorization"]))
+                return Unauthorized();
+
             _patientFeedbackService.SaveNewPatientFeedback(patientFeedbackDto);
             return Ok(patientFeedbackDto);
         }
